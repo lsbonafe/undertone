@@ -5,6 +5,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import * as webaudio from 'node-web-audio-api';
 import { IDLE_MS, midiOf } from '../motion.js';
 import { stories } from '../stories.js';
+import { SoundControl } from '../sound-control.js';
 
 // One audio context per process mirrors the browser and keeps Strudel's node pool on its own context.
 Object.assign(globalThis, webaudio);
@@ -150,6 +151,26 @@ test('pausing holds audible harmony without advancing the melody; resume, mute, 
   assert.equal(instrument.enabled, false);
   assert.equal(instrument.harmony, null, 'a late resume cannot briefly start the held sound');
   assert.equal(instrument.pulse, null);
+  context.resume = resume;
+  await context.suspend();
+  let permitResume = false;
+  const permission = new Promise(resolve => { unlock = resolve; });
+  context.resume = () => {
+    if (permitResume) resume().then(unlock);
+    return permission;
+  };
+  const sound = new SoundControl(instrument, { storage:{ getItem:() => null, setItem:() => {} } });
+  const awaitingPermission = sound.start();
+  assert.deepEqual(sound.control, { label:'Enable sound', pressed:false }, 'a real suspended context cannot present an active sound control');
+  permitResume = true;
+  await sound.toggle();
+  assert.equal(await awaitingPermission, true);
+  assert.equal(context.state, 'running');
+  assert.deepEqual(sound.control, { label:'Pause sound', pressed:true }, 'the first Enable action starts the actual audio instrument');
+  assert.ok(instrument.harmony);
+  sound.pause();
+  await delay(60);
+  assert.equal(instrument.gain.value, 0);
   context.resume = resume;
   assert.deepEqual(errors, []);
 });

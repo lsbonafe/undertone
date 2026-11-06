@@ -8,7 +8,7 @@ Undertone turns scrolling into musical phrasing. Twenty readings pair a subject 
 
 ![A timeline comparing scroll-led phrasing and a continuing groove with a scroll-played lead](docs/diagrams/scroll-behavior.svg)
 
-Sound is **on by default**. Where autoplay is permitted, playback starts automatically. Otherwise, the first click, tap or keypress unlocks audio. The **Pause sound / Enable sound** button stays available, including while the browser is waiting for permission. A pause choice is remembered in that browser. Scrolling alone may not unlock browser audio; this follows the browser's [autoplay policy](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay).
+Sound is **requested on by default**, but the control shows actual playback state. Where autoplay is permitted, music starts automatically. Otherwise, **Enable sound** remains visible until a click, tap or keypress unlocks audio; the first Enable click resumes the pending start instead of toggling it off. **Pause sound** appears when playback starts or is initializing, and the pressed indicator is only on while audio is running. A pause choice is remembered in that browser. Scrolling alone may not unlock browser audio; this follows the browser's [autoplay policy](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay).
 
 ## The stack, from article to speaker
 

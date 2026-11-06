@@ -12,13 +12,30 @@ export class SoundControl {
     } catch { /* Sound still works when browser storage is unavailable. */ }
     this.pending = null;
     this.failed = false;
+    this.contextChanged = () => this.onChange();
   }
 
   get state() {
     if (this.failed) return 'error';
     if (!this.desired) return 'paused';
-    if (this.instrument.enabled) return 'playing';
+    if (this.instrument.enabled && this.instrument.context?.state === 'running') return 'playing';
     return this.pending && this.instrument.context?.state === 'running' ? 'starting' : 'waiting';
+  }
+
+  get control() {
+    const state = this.state;
+    return {
+      label:state === 'error' ? 'Retry sound' : state === 'playing' || state === 'starting' ? 'Pause sound' : 'Enable sound',
+      pressed:state === 'playing',
+    };
+  }
+
+  observeContext() {
+    const context = this.instrument.context;
+    if (this.observedContext === context) return;
+    this.observedContext?.removeEventListener?.('statechange', this.contextChanged);
+    this.observedContext = context;
+    context?.addEventListener?.('statechange', this.contextChanged);
   }
 
   remember() {
@@ -26,11 +43,12 @@ export class SoundControl {
   }
 
   start() {
-    if (!this.desired || this.pending || this.instrument.enabled) return this.pending;
+    if (!this.desired || this.pending || this.state === 'playing') return this.pending;
     this.failed = false;
     // enable() calls AudioContext.resume synchronously, retaining click activation.
     const task = this.instrument.enable();
     this.pending = task;
+    this.observeContext();
     this.onChange();
     task.then(() => {
       if (this.pending !== task) return;
@@ -59,6 +77,7 @@ export class SoundControl {
     if (this.instrument.context?.state !== 'running') {
       this.instrument.context.resume().catch(() => {});
     }
+    return this.pending;
   }
 
   pause() {
@@ -71,9 +90,9 @@ export class SoundControl {
   }
 
   toggle() {
-    if (this.desired && !this.failed) { this.pause(); return; }
+    if (this.state === 'playing' || this.state === 'starting') { this.pause(); return; }
     this.desired = true;
     this.remember();
-    return this.start();
+    return this.pending ? this.wake() : this.start();
   }
 }

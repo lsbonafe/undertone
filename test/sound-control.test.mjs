@@ -52,10 +52,10 @@ test('a gesture unlocks a blocked autoplay attempt without initializing audio tw
   assert.equal(instrument.resumes, 2);
 });
 
-test('pause remains available while autoplay is blocked and cannot be undone by a later gesture', async () => {
+test('an explicit pause cancels pending startup and cannot be undone by a later gesture', async () => {
   const { sound, instrument, saved } = setup();
   const started = sound.start();
-  sound.toggle();
+  sound.pause();
   assert.equal(sound.state, 'paused');
   assert.equal(saved.get('undertone.sound'), 'off');
   instrument.allowed = true;
@@ -65,6 +65,30 @@ test('pause remains available while autoplay is blocked and cannot be undone by 
   assert.equal(await started, false);
   assert.equal(instrument.enabled, false, 'late initialization cannot restart paused music');
   assert.equal(sound.state, 'paused');
+});
+
+test('blocked autoplay shows an inactive Enable button and its first click starts sound', async () => {
+  const { sound, instrument } = setup();
+  const started = sound.start();
+  assert.equal(sound.desired, true);
+  assert.deepEqual(sound.control, { label:'Enable sound', pressed:false });
+  instrument.allowed = true;
+  await sound.toggle();
+  assert.equal(sound.state, 'playing');
+  assert.equal(await started, true);
+  assert.deepEqual(sound.control, { label:'Pause sound', pressed:true });
+  assert.equal(instrument.starts, 1, 'the first click unlocks the existing attempt rather than pausing it');
+});
+
+test('an interrupted audio context is not reported as playing and a gesture restarts it', async () => {
+  const { sound, instrument } = setup({ allowed:true });
+  await sound.start();
+  instrument.context.state = 'suspended';
+  assert.equal(instrument.enabled, true, 'the instrument can remain initialized during an interruption');
+  assert.equal(sound.state, 'waiting');
+  assert.equal(sound.control.pressed, false);
+  await sound.wake();
+  assert.equal(sound.state, 'playing');
 });
 
 test('the button can enable sound again and the choice survives a page reload', async () => {

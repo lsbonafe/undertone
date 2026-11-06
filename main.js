@@ -39,15 +39,15 @@ function idle(phase = instrument?.holding ? instrument?.groove ? 'loop' : 'hold'
       document.querySelectorAll('[data-pitch-class]').forEach(dot => dot.classList.toggle('active', pitches.includes(Number(dot.dataset.pitchClass))));
     }
   }
-  $('transport-status').textContent = audioError ? 'Sound needs another try' : instrument?.enabled ? phase === 'loop' ? 'Looping this passage' : phase === 'hold' ? 'Holding this moment' : 'Ready for your scroll' : sound?.desired === false ? 'Sound paused' : sound?.state === 'starting' ? 'Opening sound…' : 'Sound on · click, tap or press a key to begin';
+  $('transport-status').textContent = audioError ? 'Sound needs another try' : sound?.state === 'playing' ? phase === 'loop' ? 'Looping this passage' : phase === 'hold' ? 'Holding this moment' : 'Ready for your scroll' : sound?.desired === false ? 'Sound paused' : sound?.state === 'starting' ? 'Opening sound…' : 'Click, tap or press a key to start sound';
   $('transport-hint').textContent = phase === 'loop' ? 'Scroll to play the lead' : phase === 'hold' ? 'Scroll when you’re ready' : activeStory?.playback?.mode === 'groove' ? 'A steady groove · your scroll plays the lead' : 'Your scroll sets the phrasing';
 }
 
 function updateSoundControl() {
   $('sound-toggle').disabled = false;
-  $('sound-toggle').setAttribute('aria-pressed', String(sound.desired));
+  $('sound-toggle').setAttribute('aria-pressed', String(sound.control.pressed));
   $('sound-toggle').dataset.state = sound.state;
-  $('sound-label').textContent = sound.state === 'error' ? 'Retry sound' : sound.desired ? 'Pause sound' : 'Enable sound';
+  $('sound-label').textContent = sound.control.label;
   if (sound.state === 'playing') audioError = false;
   idle();
 }
@@ -95,8 +95,8 @@ async function loadStory(id, { navigate = false } = {}) {
   $('story-title').innerHTML = story.title;
   $('story-intro').textContent = story.intro;
   $('listening-guide').textContent = story.playback?.mode === 'groove'
-    ? 'Sound is on by default; your browser may need a click, tap or keypress to begin. The groove keeps playing while you read. Scroll to play the lead; reverse to retrace its notes. Pause sound to stop everything.'
-    : 'Sound is on by default; your browser may need a click, tap or keypress to begin. Scroll faster to pick up the pace. Stop scrolling to settle into the harmony. Pause sound whenever you like.';
+    ? 'Sound starts automatically when your browser allows it. Otherwise, click or tap the page, press a key, or choose Enable sound. The groove keeps playing while you read; scrolling plays its lead. Pause sound to stop everything.'
+    : 'Sound starts automatically when your browser allows it. Otherwise, click or tap the page, press a key, or choose Enable sound. Scroll faster to pick up the pace, and stop scrolling to hold the harmony.';
   $('adaptation-note').textContent = `${story.fictional ? 'Fictional scenario. Events and figures are invented.' : 'A short reading adapted from the linked article.'}\nOriginal music composed for this experience.`;
   $('source-name').textContent = story.publisher;
   $('source-date').textContent = story.date;
@@ -224,6 +224,8 @@ function wakeSound(event) {
 }
 document.addEventListener('pointerdown', wakeSound, { passive:true });
 document.addEventListener('pointerup', wakeSound, { passive:true });
+document.addEventListener('click', wakeSound, { passive:true });
+document.addEventListener('touchend', wakeSound, { passive:true });
 document.addEventListener('keydown', wakeSound);
 
 await loadStory(new URLSearchParams(location.search).get('story') ?? 'space');

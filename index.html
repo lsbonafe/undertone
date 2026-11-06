@@ -15,7 +15,7 @@
   <header class="masthead">
     <a href="./" class="wordmark" aria-label="Undertone home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 15h3l3-8 4 17 4-20 4 15 3-4h3"/></svg>undertone<span class="wordmark-dot">.</span></a>
     <span class="masthead-caption">A JOURNAL YOU PLAY</span>
-    <button id="sound-toggle" class="sound-button" type="button" disabled aria-pressed="true"><span class="sound-icon" aria-hidden="true">◌</span><span id="sound-label">Preparing sound…</span></button>
+    <button id="sound-toggle" class="sound-button" type="button" disabled aria-pressed="false"><span class="sound-icon" aria-hidden="true">◌</span><span id="sound-label">Preparing sound…</span></button>
   </header>
 
   <nav class="story-nav" aria-label="Choose a story">
@@ -42,7 +42,7 @@
 
     <section class="listening-invitation" aria-label="How to listen">
       <span class="invitation-mark" aria-hidden="true">↕</span>
-      <div><p>This story has an undertone.</p><span id="listening-guide">Sound is on by default; your browser may need a click, tap or keypress to begin. Scroll to play, stop scrolling to hold, and use Pause sound whenever you like.</span></div>
+      <div><p>This story has an undertone.</p><span id="listening-guide">Sound starts automatically when your browser allows it. Otherwise, click or tap the page, press a key, or choose Enable sound. Scroll to play, stop scrolling to hold, and pause whenever you like.</span></div>
       <span class="headphone-note">HEADPHONES WELCOME</span>
     </section>
 
@@ -79,7 +79,7 @@
 
   <div class="transport" role="group" aria-label="Music controls and scroll position">
     <span id="transport-direction" class="direction-symbol" aria-hidden="true">↕</span>
-    <div class="transport-copy"><span id="transport-status" role="status" aria-live="polite">Sound on · preparing the score</span><span id="transport-hint">Your scroll sets the phrasing</span></div>
+    <div class="transport-copy"><span id="transport-status" role="status" aria-live="polite">Preparing sound…</span><span id="transport-hint">Your scroll sets the phrasing</span></div>
     <div class="score-strip" id="score-strip" aria-hidden="true"><span id="score-cursor"></span></div>
     <span id="reading-progress" class="reading-progress">00%</span>
     <label class="volume-control"><span>Volume</span><input id="volume" type="range" min="0" max="100" value="55" aria-label="Music volume"></label>
