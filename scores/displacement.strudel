@@ -1,0 +1,15 @@
+// C Phrygian: a persistent metallic routine loses its softer answering voice.
+stack(
+  arrange(
+    [4, note("c4 g4 db4 c4 eb4 g4 db4 c4 c4 g4 f4 eb4 db4 eb4 db4 c4").slow(4).fm(0.35)],
+    [4, note("c4 db4 g4 c4 eb4 db4 g4 c4 ab4 g4 f4 eb4 db4 c4 db4 g4").slow(4).fm(0.7)],
+    [4, note("c4 db4 g4 c4 db4 eb4 g4 db4 c4 db4 ab4 g4 f4 eb4 db4 c4").slow(4).fm(1.05)]
+  ).s("sine").fmh(1.414).fmdecay(0.16).fmsustain(0.15)
+    .gain(0.18).attack(0.025).decay(0.12).sustain(0.16).release(0.18).lpf(2400),
+  note("c3 g3 c3 g3").slow(4).s("sine").gain(0.07).release(0.18),
+  arrange(
+    [4, note("~ eb4 ~ g4 ~ ab4 ~ g4 ~ f4 ~ eb4 ~ db4 ~ eb4").slow(4)],
+    [4, note("~ ~ ~ g4 ~ ~ ~ f4 ~ ~ ~ eb4 ~ ~ ~ db4").slow(4)],
+    [4, note("~ ~ ~ ~ ~ ~ ~ eb4 ~ ~ ~ ~ ~ ~ ~ db4").slow(4)]
+  ).s("triangle").gain(0.075).attack(0.05).decay(0.15).sustain(0.25).release(0.2).lpf(1400)
+)

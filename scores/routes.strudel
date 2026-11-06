@@ -1,0 +1,14 @@
+// D major pentatonic. More connecting answers join the spaces in a shared pulse.
+stack(
+  arrange(
+    [4, note("d4 fs4 a4 fs4 e4 d4 e4 fs4 a4 b4 a4 fs4 e4 fs4 e4 d4").slow(4)],
+    [4, note("d4 e4 fs4 a4 b4 a4 fs4 e4 fs4 a4 b4 a4 fs4 e4 a4 fs4").slow(4)],
+    [4, note("d4 fs4 a4 b4 a4 fs4 e4 d4 fs4 a4 b4 a4 fs4 e4 fs4 d4").slow(4)]
+  ).s("user").partials([1, 0.16, 0.07]).gain(0.19).attack(0.015).decay(0.12).sustain(0.2).release(0.18).lpf(3200),
+  note("d3 ~ a3 ~ d3 ~ a3 ~").slow(4).s("sine").gain(0.07).release(0.15),
+  arrange(
+    [4, note("~").slow(4)],
+    [4, note("~ a3 ~ ~ ~ fs3 ~ ~").slow(4)],
+    [4, note("~ a3 ~ b3 ~ fs3 ~ e3").slow(4)]
+  ).s("user").partials([1, 0.16, 0.07]).gain(0.065).attack(0.025).decay(0.1).sustain(0.16).release(0.15).lpf(2200)
+)

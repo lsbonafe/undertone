@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+<title id="title">One hand, two musical behaviors</title><desc id="desc">Illustrative timeline: gesture mode speeds up notes and holds a harmony on stopping; groove mode keeps its beat and plays its lead only during scrolling.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#263c35}.small{font-size:17px;fill:#54675f}.label{font-size:20px;font-weight:700}.title{font-size:30px;font-weight:700}.note{font-size:24px;font-weight:700}.mono{font-family:Menlo,Consolas,monospace;font-size:18px}</style>
+<rect width="1200" height="690" rx="22" fill="#f4f1e8"/>
+<text x="40" y="52" class="title" >One hand. Two musical behaviors.</text>
+<text x="40" y="84" class="small" >Illustrative timing, not a recording. Fast movement never queues skipped notes.</text>
+<rect x="300" y="116" width="212" height="444" fill="#ede9df"/>
+<text x="312" y="147" class="small" >SLOW SCROLL</text>
+<line x1="300" y1="160" x2="300" y2="560" stroke="#d3d9cc" stroke-width="1" stroke-dasharray="4 5"/>
+<rect x="512" y="116" width="212" height="444" fill="#ede9df"/>
+<text x="524" y="147" class="small" >READING</text>
+<line x1="512" y1="160" x2="512" y2="560" stroke="#d3d9cc" stroke-width="1" stroke-dasharray="4 5"/>
+<rect x="724" y="116" width="212" height="444" fill="#ede9df"/>
+<text x="736" y="147" class="small" >FAST SCROLL</text>
+<line x1="724" y1="160" x2="724" y2="560" stroke="#d3d9cc" stroke-width="1" stroke-dasharray="4 5"/>
+<rect x="936" y="116" width="212" height="444" fill="#e0e8dc"/>
+<text x="948" y="147" class="small" >STOP SCROLLING</text>
+<line x1="936" y1="160" x2="936" y2="560" stroke="#d3d9cc" stroke-width="1" stroke-dasharray="4 5"/>
+<text x="40" y="206" class="label" >GESTURE MODE</text>
+<text x="40" y="234" class="small" >Readings 01–17</text>
+<text x="40" y="269" class="small" >Hand → phrasing</text>
+<line x1="300" y1="240" x2="1148" y2="240" stroke="#d4dacf" stroke-width="2" />
+<circle cx="325" cy="240" r="8" fill="#b06440"/>
+<line x1="325" y1="240" x2="361" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="430" cy="240" r="8" fill="#b06440"/>
+<line x1="430" y1="240" x2="466" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="525" cy="240" r="8" fill="#b06440"/>
+<line x1="525" y1="240" x2="561" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="590" cy="240" r="8" fill="#b06440"/>
+<line x1="590" y1="240" x2="626" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="650" cy="240" r="8" fill="#b06440"/>
+<line x1="650" y1="240" x2="686" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="705" cy="240" r="8" fill="#b06440"/>
+<line x1="705" y1="240" x2="741" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="742" cy="240" r="8" fill="#b06440"/>
+<line x1="742" y1="240" x2="762" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="777" cy="240" r="8" fill="#b06440"/>
+<line x1="777" y1="240" x2="797" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="812" cy="240" r="8" fill="#b06440"/>
+<line x1="812" y1="240" x2="832" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="847" cy="240" r="8" fill="#b06440"/>
+<line x1="847" y1="240" x2="867" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="882" cy="240" r="8" fill="#b06440"/>
+<line x1="882" y1="240" x2="902" y2="240" stroke="#b06440" stroke-width="4" />
+<circle cx="917" cy="240" r="8" fill="#b06440"/>
+<line x1="917" y1="240" x2="937" y2="240" stroke="#b06440" stroke-width="4" />
+<line x1="936" y1="240" x2="1136" y2="240" stroke="#527461" stroke-width="7" />
+<text x="967" y="275" class="small" >Hold the harmony</text>
+<text x="304" y="318" class="small" >Wider gaps → closer gaps → bounded fast phrasing → held harmony</text>
+<text x="40" y="387" class="label" >GROOVE MODE</text>
+<text x="40" y="415" class="small" >Readings 18–20</text>
+<text x="40" y="452" class="small" >Clock → backing</text>
+<text x="40" y="511" class="small" >Hand → lead</text>
+<line x1="300" y1="437" x2="1148" y2="437" stroke="#d4dacf" stroke-width="2" />
+<rect x="318" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="371" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="424" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="477" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="530" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="583" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="636" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="689" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="742" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="795" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="848" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="901" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="954" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="1007" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="1060" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<rect x="1113" y="429" width="11" height="16" rx="3" fill="#527461"/>
+<line x1="300" y1="499" x2="1148" y2="499" stroke="#d4dacf" stroke-width="2" />
+<circle cx="325" cy="499" r="8" fill="#b06440"/>
+<circle cx="430" cy="499" r="8" fill="#b06440"/>
+<circle cx="525" cy="499" r="8" fill="#b06440"/>
+<circle cx="590" cy="499" r="8" fill="#b06440"/>
+<circle cx="650" cy="499" r="8" fill="#b06440"/>
+<circle cx="705" cy="499" r="8" fill="#b06440"/>
+<circle cx="742" cy="499" r="8" fill="#b06440"/>
+<circle cx="777" cy="499" r="8" fill="#b06440"/>
+<circle cx="812" cy="499" r="8" fill="#b06440"/>
+<circle cx="847" cy="499" r="8" fill="#b06440"/>
+<circle cx="882" cy="499" r="8" fill="#b06440"/>
+<circle cx="917" cy="499" r="8" fill="#b06440"/>
+<line x1="925" y1="499" x2="989" y2="499" stroke="#b06440" stroke-width="4" stroke-dasharray="6 6"/>
+<text x="1010" y="511" class="small" >Lead rings out</text>
+<text x="304" y="552" class="small" >Steady backing; lead notes follow your hand, then ring out.</text>
+<rect x="40" y="597" width="340" height="48" rx="10" fill="#e3e6dc"/>
+<text x="55" y="627" class="small" >Tiny jitter is ignored</text>
+<rect x="415" y="597" width="340" height="48" rx="10" fill="#e3e6dc"/>
+<text x="430" y="627" class="small" >Big jumps do not queue notes</text>
+<rect x="820" y="597" width="340" height="48" rx="10" fill="#e3e6dc"/>
+<text x="835" y="627" class="small" >Pause sound → silence</text>
+</svg>

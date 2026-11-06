@@ -1,0 +1,15 @@
+// Original electric-key Cmaj9 material, played one octave slower; C/F parallel major-nine colors.
+stack(
+  arrange(
+    [4, note("c4 c4 f4 c4 c4 f4 c4 f4").slow(4).lpf(1500)],
+    [4, note("f4 f4 c4 f4 c4 c4 f4 c4").slow(4).lpf(1900)],
+    [4, note("c4 f4 c4 c4 f4 c4 f4 c4").slow(4).lpf(1200)]
+  ).s("u_tape").speed(0.5).vib(0.22).vibmod(0.09).pan(sine.range(0.32,0.68).slow(8))
+    .gain(0.2).attack(0.06).decay(0.14).sustain(0.55).release(0.45)
+    .room(0.26).roomsize(0.9).roomlp(1700).delay(0.24).delaytime(0.38).delayfeedback(0.2).orbit(2),
+  note("g5 ~ e5 ~ a5 ~ g5 ~").slow(4).s("haze").spread(0.16).vib(0.22).vibmod(0.08)
+    .gain(0.25).attack(0.012).decay(0.09).sustain(0.2).release(0.22).lpf(3800).delay(0.2).delaytime(0.35).delayfeedback(0.16).orbit(1),
+  note("c3 g3 c3 g3").slow(4).s("sine").gain(0.045).release(0.3),
+  s("u_kick ~ ~ ~ u_snare ~ ~ ~").gain(0.07).attack(0.001).release(0.1).lpf(1800).delay(0).orbit(3),
+  s("~ u_hat ~ ~ ~ u_hat ~ ~").gain(0.025).attack(0.001).release(0.03).lpf(3000).delay(0).orbit(3)
+)

@@ -1,0 +1,14 @@
+// Acid electro: syncopated drums, a resonant saturated line and sparse metallic accents.
+stack(
+  arrange(
+    [4, note("d3 a3 d3 f3 e3 d3 a3 c4 d3 f3 a3 d4 c4 a3 f3 e3").slow(4).lpenv(2.2).lpf(500)],
+    [4, note("d3 e3 f3 a3 c4 a3 d3 e3 f3 a3 c4 d4 c4 a3 f3 d3").slow(4).lpenv(3.7).lpf(850)],
+    [4, note("d3 f3 a3 c4 d4 c4 a3 f3 e3 d3 f3 a3 f3 e3 a3 d3").slow(4).lpenv(2.8).lpf(1100)]
+  ).s("grit").drive(3.2).gain(0.18).lpq(4).lpattack(0.002).lpdecay(0.16).lpsustain(0.1)
+    .attack(0.005).decay(0.09).sustain(0.12).release(0.08).delay(0.08).delaytime(0.16).delayfeedback(0.1).orbit(2),
+  note("d4 ~ a4 ~ c5 ~ a4 ~").slow(4).s("sine").fm(1.2).fmh(2).gain(0.3).attack(0.006).decay(0.04).sustain(0.6)
+    .release(0.12).lpf(4000).delay(0.12).delaytime(0.16).delayfeedback(0.12).orbit(1),
+  s("u_kick ~ ~ u_kick ~ ~ u_kick ~").gain(0.23).attack(0.001).release(0.1).delay(0).orbit(3),
+  s("~ ~ u_snare ~ ~ ~ u_snare ~").gain(0.12).attack(0.001).release(0.08).delay(0).orbit(3),
+  s("u_hat*8").gain("0.025 0.05").attack(0.001).release(0.03).pan("0.35 0.65").delay(0).orbit(3)
+)

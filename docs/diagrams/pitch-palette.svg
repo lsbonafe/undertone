@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">A shared pitch palette in both directions</title><desc id="desc">D Lydian notes, forward and backward melodic order, and a D-root held voicing with simple frequency ratios.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#263c35}.small{font-size:17px;fill:#54675f}.label{font-size:20px;font-weight:700}.title{font-size:30px;font-weight:700}.note{font-size:24px;font-weight:700}.mono{font-family:Menlo,Consolas,monospace;font-size:18px}</style>
+<rect width="1200" height="720" rx="22" fill="#f4f1e8"/>
+<text x="40" y="52" class="title" >Change the order. Keep a shared musical home.</text>
+<text x="40" y="84" class="small" >D Lydian: G♯ adds color; D and A give the phrase a recurring center.</text>
+<text x="40" y="148" class="label" >PITCH PALETTE</text>
+<rect x="295" y="119" width="109" height="118" rx="10" fill="#e5cbb9" stroke="#c5cdc1"/>
+<text x="349" y="169" class="note" text-anchor="middle">D</text>
+<text x="349" y="211" class="small" text-anchor="middle">1 / root</text>
+<rect x="416" y="119" width="109" height="118" rx="10" fill="#fffdf7" stroke="#c5cdc1"/>
+<text x="470" y="169" class="note" text-anchor="middle">E</text>
+<text x="470" y="211" class="small" text-anchor="middle">2</text>
+<rect x="537" y="119" width="109" height="118" rx="10" fill="#fffdf7" stroke="#c5cdc1"/>
+<text x="591" y="169" class="note" text-anchor="middle">F♯</text>
+<text x="591" y="211" class="small" text-anchor="middle">3</text>
+<rect x="658" y="119" width="109" height="118" rx="10" fill="#d8e2e7" stroke="#c5cdc1"/>
+<text x="712" y="169" class="note" text-anchor="middle">G♯</text>
+<text x="712" y="211" class="small" text-anchor="middle">♯4 / color</text>
+<rect x="779" y="119" width="109" height="118" rx="10" fill="#d2dfcf" stroke="#c5cdc1"/>
+<text x="833" y="169" class="note" text-anchor="middle">A</text>
+<text x="833" y="211" class="small" text-anchor="middle">5 / fifth</text>
+<rect x="900" y="119" width="109" height="118" rx="10" fill="#fffdf7" stroke="#c5cdc1"/>
+<text x="954" y="169" class="note" text-anchor="middle">B</text>
+<text x="954" y="211" class="small" text-anchor="middle">6</text>
+<rect x="1021" y="119" width="109" height="118" rx="10" fill="#fffdf7" stroke="#c5cdc1"/>
+<text x="1075" y="169" class="note" text-anchor="middle">C♯</text>
+<text x="1075" y="211" class="small" text-anchor="middle">7</text>
+<text x="40" y="301" class="label" >SCROLL DOWN</text>
+<text x="298" y="301" class="note" >D4    →    A4    →    E5    →    F♯5</text>
+<text x="40" y="354" class="label" >SCROLL UP</text>
+<text x="298" y="354" class="note" >F♯5   →    E5    →    A4    →    D4</text>
+<text x="298" y="394" class="small" >Both directions use one palette and a recurring tonal center.</text>
+<line x1="40" y1="422" x2="1160" y2="422" stroke="#d4dacf" stroke-width="2" />
+<text x="40" y="474" class="label" >STOP SCROLLING</text>
+<text x="40" y="506" class="small" >Gesture-mode example:</text>
+<text x="40" y="535" class="small" >hold the latest color,</text>
+<text x="40" y="564" class="small" >root and fifth.</text>
+<text x="297" y="465" class="label" >Held voice</text>
+<text x="489" y="465" class="label" >Relative frequency</text>
+<text x="938" y="465" class="label" >Frequency</text>
+<text x="297" y="510" class="small" >D3 / root</text>
+<rect x="490" y="493" width="130" height="20" rx="5" fill="#527461"/>
+<text x="835" y="510" class="mono" >1 : 1</text>
+<text x="938" y="510" class="small" >~147 Hz</text>
+<text x="297" y="557" class="small" >A3 / fifth</text>
+<rect x="490" y="540" width="195" height="20" rx="5" fill="#527461"/>
+<text x="835" y="557" class="mono" >3 : 2</text>
+<text x="938" y="557" class="small" >~220 Hz</text>
+<text x="297" y="604" class="small" >F♯4 / upper note</text>
+<rect x="490" y="587" width="325" height="20" rx="5" fill="#527461"/>
+<text x="835" y="604" class="mono" >5 : 2</text>
+<text x="938" y="604" class="small" >~367 Hz</text>
+<text x="40" y="667" class="small" >Simple-ratio held tuning and softer spectra are design choices, not a universal guarantee of comfort.</text>
+</svg>

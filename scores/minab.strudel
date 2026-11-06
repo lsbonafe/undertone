@@ -1,0 +1,9 @@
+// A minor pentatonic: remove a harmonic and leave holes in an unfinished phrase.
+stack(
+  arrange(
+    [4, note("a3 c4 e4 ~ d4 c4 a3 ~ c4 d4 e4 g4 e4 d4 c4 ~").slow(4).partials([1, 0.2, 0.14])],
+    [4, note("a3 c4 d4 ~ e4 d4 c4 a3 c4 ~ d4 e4 d4 c4 a3 ~").slow(4).partials([1, 0, 0.14])],
+    [4, note("a3 c4 e4 ~ d4 c4 a3 ~ g3 a3 c4 d4 c4 a3 g3 ~").slow(4).partials([1, 0, 0.08])]
+  ).s("user").gain(0.2).attack(0.08).decay(0.18).sustain(0.28).release(0.3).lpf(2000),
+  note("a2 e3 a2 e3").slow(4).s("sine").gain(0.07).release(0.24)
+)

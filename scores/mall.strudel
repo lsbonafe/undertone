@@ -1,0 +1,17 @@
+// Mallsoft: extended chords, narrow-band warmth and a shared, slow pitch drift.
+stack(
+  arrange(
+    [4, note("<[d4,fs4,a4,cs5,e5] [g3,b3,d4,fs4,a4]>").slow(2).lpf(1600)],
+    [4, note("<[g3,b3,d4,fs4,a4] [d4,fs4,a4,cs5,e5]>").slow(2).lpf(2100)],
+    [4, note("<[d4,fs4,a4,cs5,e5] [g3,b3,d4,fs4,a4]>").slow(2).lpf(1250)]
+  ).s("haze").spread(0.22).vib(0.28).vibmod(0.11)
+    .gain(0.11).attack(0.12).decay(0.18).sustain(0.55).release(0.5)
+    .room(0.24).roomsize(0.85).roomlp(1800).delay(0.2).delaytime(0.36).delayfeedback(0.2).orbit(2),
+  // Orbit 1 is the foreground line, played by scrolling instead of the loop clock.
+  note("d5 cs5 a4 fs4 e4 fs4 a4 b4").slow(4).s("sine").fm(0.8).fmh(2)
+    .gain(0.22).lpf(4800).attack(0.008).decay(0.08).sustain(0.18).release(0.22)
+    .delay(0.18).delaytime(0.28).delayfeedback(0.14).orbit(1),
+  note("d3 a3 d3 a3").slow(4).s("sine").gain(0.05).release(0.25),
+  s("u_kick ~ u_snare ~ u_kick ~ u_snare ~").gain(0.085).attack(0.001).release(0.1).lpf(2300).delay(0).orbit(3),
+  s("~ u_hat ~ u_hat ~ u_hat ~ u_hat").gain(0.028).attack(0.001).release(0.035).lpf(3800).delay(0).orbit(3)
+)

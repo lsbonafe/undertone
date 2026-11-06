@@ -1,0 +1,14 @@
+// G major: rising triads, an opening brass filter, and an answering voice.
+stack(
+  arrange(
+    [4, note("g4 b4 d5 g5 fs5 e5 d5 b4 g4 b4 d5 e5 d5 b4 a4 g4").slow(4).lpf(2400)],
+    [4, note("g4 b4 d5 g5 a5 g5 e5 d5 b4 d5 g5 a5 g5 e5 d5 b4").slow(4).lpf(4200)],
+    [4, note("g5 b5 a5 g5 e5 d5 b4 d5 g5 a5 b5 a5 g5 e5 d5 g5").slow(4).lpf(5800)]
+  ).s("sawtooth").gain(0.16).attack(0.015).decay(0.12).sustain(0.22).release(0.18),
+  note("g2 d3 g2 d3").slow(4).s("sine").gain(0.07).release(0.18),
+  arrange(
+    [4, note("~").slow(4)],
+    [4, note("~ g3 ~ b3 ~ d4 ~ g3").slow(4)],
+    [4, note("~ b3 ~ d4 ~ g4 ~ d4").slow(4)]
+  ).s("triangle").gain(0.065).attack(0.02).decay(0.1).sustain(0.18).release(0.16).lpf(2200)
+)

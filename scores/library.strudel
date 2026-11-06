@@ -1,0 +1,13 @@
+// Formants suggest unspoken vowels; a dedicated orbit keeps the room and echo coherent.
+stack(
+  arrange(
+    [4, note("e4 g4 b4 a4 g4 e4 d4 e4 g4 a4 b4 d5 b4 a4 g4 e4").slow(2).vowel("u o")],
+    [4, note("g4 a4 b4 d5 e5 d5 b4 a4 g4 e4 g4 a4 b4 a4 g4 e4").slow(2).vowel("o a")],
+    [4, note("e4 g4 a4 b4 d5 b4 a4 g4 e4 d4 e4 g4 a4 g4 d4 e4").slow(2).vowel("a e o u")]
+  ).s("sawtooth").gain(0.2).hpf(90).lpf(3800)
+    .pan(sine.range(0.25,0.75).slow(8))
+    .attack(0.045).decay(0.16).sustain(0.25).release(0.2)
+    .room(0.22).roomsize(0.85).roomlp(2200)
+    .delay(0.22).delaytime(0.32).delayfeedback(0.18).orbit(2),
+  note("e3 b3 e3 b3").slow(4).s("sine").gain(0.07).release(0.25)
+)

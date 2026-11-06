@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e8">
+  <meta name="description" content="20 readings with original Strudel scores, including vaporwave and acid electro. Explore sampling, synthesis, rhythm and effects through scrolling.">
+  <title>Undertone — stories you can play</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./main.js"></script>
+</head>
+<body data-story="space">
+  <a class="skip-link" href="#reading">Skip to the reading</a>
+  <header class="masthead">
+    <a href="./" class="wordmark" aria-label="Undertone home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M3 15h3l3-8 4 17 4-20 4 15 3-4h3"/></svg>undertone<span class="wordmark-dot">.</span></a>
+    <span class="masthead-caption">A JOURNAL YOU PLAY</span>
+    <button id="sound-toggle" class="sound-button" type="button" disabled aria-pressed="true"><span class="sound-icon" aria-hidden="true">◌</span><span id="sound-label">Preparing sound…</span></button>
+  </header>
+
+  <nav class="story-nav" aria-label="Choose a story">
+    <a href="?story=space" data-story-link="space"><span>01</span> Wonder <span class="nav-subject">/ the cosmos</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
+    <a href="?story=reef" data-story-link="reef"><span>02</span> Unease <span class="nav-subject">/ our oceans</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
+    <a href="?story=orchestra" data-story-link="orchestra"><span>03</span> Hope <span class="nav-subject">/ human ingenuity</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
+  </nav>
+
+  <main id="main-content">
+    <section class="article-opening" aria-labelledby="story-title">
+      <div class="opening-copy">
+        <p class="eyebrow"><span id="story-number">01</span> <span class="tiny-line"></span><span id="story-category">SPACE & DISCOVERY</span></p>
+        <h1 id="story-title">Where stars<br><em>begin.</em></h1>
+        <p id="story-intro" class="standfirst">Inside a cloud of dust, something extraordinary is taking shape.</p>
+        <div class="story-meta"><span id="source-name">NASA</span><span class="meta-dot">·</span><time id="source-date">19 October 2022</time><span class="meta-dot">·</span><span id="reading-length"></span></div>
+        <p id="adaptation-note" class="adaptation-note">A short reading adapted from the linked article.<br>Original music composed for this experience.</p>
+      </div>
+      <figure class="hero-figure">
+        <img id="story-image" src="./assets/images/pillars.png" alt="The rust-colored Pillars of Creation surrounded by stars, photographed by the James Webb Space Telescope." width="640" height="720">
+        <div class="image-label"><span id="image-tag">A FIELD GUIDE TO WONDER</span><span aria-hidden="true">↗</span></div>
+        <figcaption id="image-credit">NASA, ESA, CSA, STScI · Image processing: DePasquale, Koekemoer & Pagan</figcaption>
+      </figure>
+    </section>
+
+    <section class="listening-invitation" aria-label="How to listen">
+      <span class="invitation-mark" aria-hidden="true">↕</span>
+      <div><p>This story has an undertone.</p><span id="listening-guide">Sound is on by default; your browser may need a click, tap or keypress to begin. Scroll to play, stop scrolling to hold, and use Pause sound whenever you like.</span></div>
+      <span class="headphone-note">HEADPHONES WELCOME</span>
+    </section>
+
+    <div class="reading-layout">
+      <aside class="score-sidebar" aria-label="About the music">
+        <div class="score-card">
+          <p class="eyebrow">THE FEELING</p>
+          <p class="feeling" id="score-feeling">Wonder</p>
+          <p id="score-text" class="score-description"></p>
+          <div class="score-divider"></div>
+          <p class="eyebrow">THE PALETTE</p>
+          <p id="score-scale" class="scale-name"></p>
+          <p id="score-texture" class="texture-name"></p>
+          <div id="pitch-palette" class="pitch-palette" aria-label="Notes used in the score"></div>
+          <div class="method-note"><p class="eyebrow">HOW THE SOUND IS MADE</p><p id="synth-technique" class="method-name"></p><p id="synth-method"></p><div id="learn-links" class="learn-links" hidden></div></div>
+          <details class="theory-details"><summary>Why it works both ways <span aria-hidden="true">+</span></summary><p id="score-theory"></p><p>These moods are compositional interpretations, not universal emotional rules.</p><a href="https://viva.pressbooks.pub/openmusictheory/chapter/collections/" target="_blank" rel="noopener noreferrer">The theory behind the palette ↗</a></details>
+          <a id="score-file" class="score-file" href="./scores/space.strudel" target="_blank" rel="noopener">Read the .strudel score <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+      <article id="reading" class="reading" aria-label="The reading"></article>
+    </div>
+
+    <section class="story-end" aria-labelledby="end-title">
+      <p class="eyebrow">THE OTHER DIRECTION IS STILL THERE</p>
+      <h2 id="end-title">Read it again.<br><em>Hear it differently.</em></h2>
+      <p>Your hand changes the phrasing. The story keeps its place.</p>
+      <a id="original-link" class="original-link" href="https://science.nasa.gov/missions/webb/nasas-webb-takes-star-filled-portrait-of-pillars-of-creation/" target="_blank" rel="noopener noreferrer">Read the original article <span aria-hidden="true">↗</span></a>
+      <p id="related-sources" class="related-sources" hidden></p>
+      <a id="next-story" class="next-story" href="?story=reef">Next: Unease / our oceans <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="footer"><span>UNDERTONE / AN EXPERIMENT IN READING & LISTENING</span><span>10 sourced readings. 10 fictional stories. 20 scores. Made with <a href="https://strudel.cc/" target="_blank" rel="noopener noreferrer">Strudel</a>.</span><a href="https://github.com/lsbonafe/undertone#readme" target="_blank" rel="noopener">Source & how it works ↗</a></footer>
+
+  <div class="transport" role="group" aria-label="Music controls and scroll position">
+    <span id="transport-direction" class="direction-symbol" aria-hidden="true">↕</span>
+    <div class="transport-copy"><span id="transport-status" role="status" aria-live="polite">Sound on · preparing the score</span><span id="transport-hint">Your scroll sets the phrasing</span></div>
+    <div class="score-strip" id="score-strip" aria-hidden="true"><span id="score-cursor"></span></div>
+    <span id="reading-progress" class="reading-progress">00%</span>
+    <label class="volume-control"><span>Volume</span><input id="volume" type="range" min="0" max="100" value="55" aria-label="Music volume"></label>
+  </div>
+  <noscript><p class="noscript">The interactive music needs JavaScript. You can still follow the source links to read the original articles.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,10 @@
+// Undertone 03 — Hope. Original composition, C major pentatonic.
+// No semitone steps or one-way cadences; the phrases can answer in either direction.
+stack(
+  arrange(
+    [4, note("c4 e4 g4 a4 g4 e4 d4 e4 g4 a4 c5 a4 g4 e4 d4 c4").slow(4)],
+    [4, note("e4 g4 a4 c5 d5 e5 d5 c5 a4 g4 e4 g4 a4 c5 g4 e4").slow(4)],
+    [4, note("c5 e5 g5 e5 d5 c5 a4 g4 e4 g4 a4 c5 a4 g4 e4 c5").slow(4)]
+  ).s("triangle").gain(0.3).attack(0.004).decay(0.09).sustain(0.08).release(0.07).lpf(3500),
+  note("c3 g3 e3 g3").slow(2).s("sine").gain(0.13).attack(0.006).decay(0.1).sustain(0.12).release(0.08)
+)

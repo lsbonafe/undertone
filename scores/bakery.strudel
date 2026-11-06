@@ -1,0 +1,12 @@
+// Filter envelopes open each warm note; small vibrato adds breath.
+stack(
+  arrange(
+    [4, note("f3 a3 c4 d4 c4 a3 g3 f3 a3 c4 d4 c4 a3 g3 c4 f3").slow(4).lpf(600).lpenv(2.1)],
+    [4, note("a3 c4 d4 f4 e4 d4 c4 a3 g3 a3 c4 d4 c4 a3 g3 f3").slow(4).lpf(850).lpenv(1.6)],
+    [4, note("f4 d4 c4 a3 g3 f3 a3 c4 d4 c4 a3 g3 f3 g3 a3 f3").slow(4).lpf(1100).lpenv(1.2)]
+  ).s("sawtooth").gain(0.16).lpq(0.6).lpattack(0.04).lpdecay(0.2).lpsustain(0.25).lprelease(0.15)
+    .vib(4).vibmod(0.07).pan(sine.range(0.35,0.65).slow(4))
+    .attack(0.035).decay(0.16).sustain(0.3).release(0.2)
+    .room(0.08).roomsize(0.6).delay(0.08).delaytime(0.18).delayfeedback(0.1).orbit(2),
+  note("f2 c3 f2 c3").slow(4).s("sine").gain(0.07).release(0.2)
+)

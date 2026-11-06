@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" fill="none">
+  <rect width="640" height="720" fill="#dfdfe5"/>
+  <path d="M0 498H640V720H0Z" fill="#bfc0ce"/>
+  <path d="M78 109H562V286H78Z" fill="#c8cad5"/>
+  <path d="M101 198H151L170 162L193 232L219 179L239 198H287L306 162L329 232L355 179L375 198H423L442 162L465 232L491 179L511 198H539" stroke="#777b99" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M55 429H585V452H55Z" fill="#9797ac"/>
+  <path d="M75 452V553M565 452V553" stroke="#7d7f96" stroke-width="9"/>
+  <g fill="#82879c"><rect x="91" y="337" width="102" height="70" rx="4"/><rect x="270" y="337" width="102" height="70" rx="4"/><rect x="449" y="337" width="102" height="70" rx="4"/></g>
+  <g stroke="#82879c" stroke-width="8"><path d="M142 407V428M321 407V428M500 407V428"/></g>
+  <g stroke="#b2b8c9" stroke-width="3"><path d="M110 358H172M110 374H151M289 358H351M289 374H330M468 358H530M468 374H509"/></g>
+  <path d="M105 531V485H178V531M100 536H184M117 536V591M169 536V591M458 531V485H531V531M452 536H537M470 536V591M520 536V591" stroke="#898b9e" stroke-width="9"/>
+  <path d="M285 589V531Q285 518 298 518H347Q360 518 360 531V589M279 592H367M296 592L288 659M349 592L359 659" stroke="#6c6e89" stroke-width="10"/>
+  <path d="M62 681H578" stroke="#a8aabd"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" fill="none">
+  <defs><pattern id="votes" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M10 18L17 25L29 11" stroke="#6b7e65" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></pattern></defs>
+  <rect width="640" height="720" fill="#dfe4d8"/>
+  <circle cx="320" cy="279" r="202" fill="#ebe7cc"/>
+  <rect x="119" y="126" width="168" height="324" rx="4" fill="#f4f1e8"/>
+  <rect x="353" y="126" width="168" height="324" rx="4" fill="#f4f1e8"/>
+  <path d="M139 159H267V411H139ZM373 159H501V411H373Z" fill="url(#votes)"/>
+  <path d="M203 450V507H320M437 450V507H320V554" stroke="#789078" stroke-width="3"/>
+  <rect x="244" y="548" width="152" height="78" rx="5" fill="#819279"/>
+  <path d="M282 585H358" stroke="#e8ebdf" stroke-width="5" stroke-linecap="round"/>
+  <path d="M87 663H553" stroke="#b3beaa"/>
+</svg>

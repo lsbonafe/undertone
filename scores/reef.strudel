@@ -1,0 +1,10 @@
+// Undertone 02 — Unease. Original composition, D Phrygian.
+// E-flat above a D pedal is intentional tension, kept when retracing the notes.
+stack(
+  arrange(
+    [4, note("d3 a3 eb4 d4 f4 eb4 d4 a3 c4 bb3 a3 g3 eb4 d4 a3 d3").slow(4)],
+    [4, note("d4 eb4 d4 a3 bb3 a3 eb4 f4 g4 f4 eb4 d4 c4 bb3 a3 eb4").slow(4)],
+    [4, note("d4 ~ eb4 d4 a3 ~ c4 bb3 a3 ~ g3 f3 eb3 ~ a3 d3").slow(4)]
+  ).s("triangle").gain(0.24).attack(0.012).decay(0.13).sustain(0.35).release(0.12).lpf(1250),
+  note("d2 ~ a2 ~").slow(2).s("sine").gain(0.19).attack(0.02).release(0.11)
+)
