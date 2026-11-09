@@ -71,7 +71,6 @@ flowchart TB
 | Sustained sound | `harmony.js`, `comfort.js` | Keeps the harmonic moment sounding during a reading pause in gesture mode. |
 | Sound sources | Strudel synths, ZZFX, custom Web Audio voices, original samples | Pure waves, subtractive/additive/FM colors, degradation, unison pads, saturated bass and sampling. |
 | Development | Node.js 22+, `node:test`, `node-web-audio-api` | Runs a local server, stages static files and verifies timing and rendered audio. The native audio package is development-only. |
-| Hosting | GitHub Actions → GitHub Pages | Tests and builds `dist/`, then publishes the static site. No application server runs in production. |
 
 No visitor account, API key, DJ Opus service, remote music API or sample bank is required. The Strudel engine and audio material are bundled locally. Optional Google Fonts have system-font fallbacks.
 
@@ -155,7 +154,7 @@ cd undertone
 npm start
 ```
 
-Open **http://127.0.0.1:4173**. Node.js **22 or newer** is required. Preview and static staging use built-in Node APIs, so neither needs an npm installation.
+Open **http://127.0.0.1:4173**. Node.js **22 or newer** is required. The local preview needs no npm installation.
 
 For the complete development checks:
 
@@ -176,21 +175,6 @@ python3 scripts/make-porcelain.py
 python3 scripts/make-genre-samples.py
 python3 scripts/make-doc-diagrams.py
 ```
-
-## Publish with GitHub Pages
-
-```mermaid
-flowchart LR
-    M["Push main"] --> T["GitHub Actions<br/>npm ci → npm test"]
-    T --> S["npm run build<br/>Stage a public-file allowlist in dist/"]
-    S --> U["Upload Pages artifact"]
-    U --> D["Deploy to GitHub Pages"]
-    D --> W["HTTPS website<br/>All music runs in the visitor's browser"]
-```
-
-[`.github/workflows/pages.yml`](.github/workflows/pages.yml) validates every pull request and deploys successful pushes to `main`. Repository Pages settings use **GitHub Actions** as the publishing source. The deployment needs `pages: write` and `id-token: write`; the build only needs read access to source.
-
-`build.mjs` copies only the public application, scores, assets, docs, original-material generators and license files into `dist/`. It excludes tests, dependencies, server files, `.local/` logs and Git metadata. Relative asset URLs and query-string story selection support GitHub's `/undertone/` repository subpath. Only this static artifact is hosted; no account credentials or service processes are deployed.
 
 ## License and provenance
 
