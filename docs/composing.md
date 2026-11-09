@@ -1,18 +1,22 @@
 # Composing for scroll
 
-This is a working guide for people and agents writing original scores for Undertone. The [README](../README.md#how-a-scroll-becomes-music) explains the player and the [existing scores](../scores/) show concrete arrangements. The mappings below describe this project's musical choices, not rules that make a particular emotion inevitable.
+This is a working guide for people and agents writing original scores for Undertone. The [architecture guide](architecture.md#how-a-scroll-becomes-music) explains the player and the [existing scores](../scores/) show concrete arrangements. The mappings below describe this project's musical choices, not rules that make a particular emotion inevitable.
 
 ## Begin with a musical brief
 
 Write down the subject, the section of text being scored, the feeling you want to explore, and one sound-making technique that relates to it. Choose a tonal center and a small pitch collection, then identify a recurring root or fifth that can anchor both directions. Give each of the three passages a change in register, density, harmony, or timbre that follows the text. Make the connection an explicit analogy, not a claim that the subject has a universal sound.
 
-Examples already in the repo: [`space.strudel`](../scores/space.strudel) uses D Lydian over a D–A reference; [`erosion.strudel`](../scores/erosion.strudel) filters upper harmonics as its reading describes removal; [`mall.strudel`](../scores/mall.strudel) uses detuned extended chords and a separate scroll-played chime. The [README theory section](../README.md#the-musical-theory) explains the pitch and synthesis reasoning behind these choices.
+Examples already in the repo: [`space.strudel`](../scores/space.strudel) uses D Lydian over a D–A reference; [`erosion.strudel`](../scores/erosion.strudel) filters upper harmonics as its reading describes removal; [`mall.strudel`](../scores/mall.strudel) uses detuned extended chords and a separate scroll-played chime. The [theory section](architecture.md#the-musical-theory) explains the pitch and synthesis reasoning behind these choices.
 
 ## Shape the score for movement
 
 The current player maps the article from 0 to **12 Strudel cycles**. Compose three four-cycle passages with audible pitched material in each. Moving down traverses note groups forward; moving up traverses them backward. A useful motif survives reversal because its notes share a pitch collection and tonal reference, even though its shape changes. Avoid making every passage depend on a one-way cadence to make sense. Test the actual reverse trip; reversing notes does not automatically preserve a phrase's effect.
 
 At a slow scroll, attacks are spaced further apart. At a fast scroll, the player limits density, shortens tails, simplifies dense chords, and drops skipped groups. Make the essential contour audible without every inner voice. Keep a clear lead above its supporting layers, and avoid stacking long releases or strong delays that blur fast movement. In this repo's scores, authored gain is kept at or below **0.3** per event; rendered output still needs a headroom check because overlapping voices can add up.
+
+### Continuous touch
+
+Set `touch: 'continuous'` to interpret the foreground as twelve slowly blended harmonic frames. It uses the score's pitch collection with a shared pedal and a lower color register; scroll speed shapes level, brightness and stereo. This replaces the foreground instrument and its note attacks with a sustained texture. Identify the foreground on **orbit 1** for predictable selection. Both hold and groove modes support either touch. See [continuous touch](texture-study.md).
 
 ### Hold mode
 

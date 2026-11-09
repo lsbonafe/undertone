@@ -24,7 +24,8 @@ const article = new FakeElement();
 test('a standalone article can load, move, change scores and release its listeners', async () => {
   const progress = [];
   const player = await createScrollScore({ contentElement:article, scoreUrl:'first.strudel', autoStart:false, onProgress:value => progress.push(value) });
-  assert.equal(player.state, 'waiting');
+  assert.equal(player.state, 'paused');
+  assert.equal(player.touch, 'notes');
   assert.ok(player.instrument.events.length);
   window.scrollY = 400;
   for (const handler of listeners.get('scroll')) handler();
@@ -48,6 +49,7 @@ test('a standalone article can load, move, change scores and release its listene
 
 test('invalid settings and failed loads report errors without trapping a new player', async () => {
   await assert.rejects(createScrollScore({ contentElement:article, scoreUrl:'x', mode:'groove' }), /bpm/);
+  await assert.rejects(createScrollScore({ contentElement:article, scoreUrl:'x', touch:'other' }), /touch/);
   await assert.rejects(createScrollScore({ contentElement:article, scoreUrl:'missing.strudel', autoStart:false }), /404/);
   const player = await createScrollScore({ contentElement:article, scoreUrl:'first.strudel', autoStart:false });
   await assert.rejects(createScrollScore({ contentElement:article, scoreUrl:'first.strudel', autoStart:false }), /Only one/);
@@ -55,4 +57,24 @@ test('invalid settings and failed loads report errors without trapping a new pla
   assert.ok(player.instrument.events.length, 'invalid settings keep the current score');
   assert.ok(player);
   player.destroy();
+});
+
+test('touch selection survives score loads and preserves paused playback', async () => {
+  const player = await createScrollScore({ contentElement:article, scoreUrl:'first.strudel', touch:'continuous', autoStart:false });
+  try {
+    assert.equal(player.touch,'continuous');
+    assert.equal(player.desired,false);
+    for (const handler of listeners.get('click')) handler({isTrusted:true,target:{closest:()=>null}});
+    assert.equal(player.instrument.enabled,false,'manual startup must not wake on unrelated gestures');
+    await player.setScore('second.strudel',{mode:'groove',bpm:90});
+    assert.equal(player.instrument.playback.gesture,false);
+    player.setTouch('notes');
+    assert.equal(player.instrument.playback.gesture,true);
+    assert.equal(player.state,'paused');
+    await player.setScore('first.strudel');
+    assert.equal(player.touch,'notes');
+    assert.throws(()=>player.setTouch('other'),/Touch/);
+    assert.equal(player.touch,'notes');
+  } finally { player.destroy(); }
+  assert.throws(()=>player.setTouch('continuous'),/destroyed/);
 });

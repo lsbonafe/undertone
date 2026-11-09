@@ -1,20 +1,22 @@
-import { ScrollInstrument, compileScore } from './music.js';
+import { compileScore } from './music.js';
+import { TextureInstrument } from './texture.js';
 import { scrollProgress } from './motion.js';
 import { SoundControl } from './sound-control.js';
 
 let activePlayer = null;
 
-export async function createScrollScore({ contentElement, scoreUrl, mode = 'hold', bpm, character = 'electronic',
+export async function createScrollScore({ contentElement, scoreUrl, touch = 'notes', mode = 'hold', bpm, character = 'electronic',
   onStateChange = () => {}, onNotes = () => {}, onIdle = () => {}, onProgress = () => {}, onError = () => {},
   preferenceKey = 'undertone.sound', volume = 0.55, autoStart = true } = {}) {
   if (!(contentElement instanceof Element) || !contentElement.isConnected) throw new TypeError('contentElement must be an attached DOM element');
   if (typeof scoreUrl !== 'string' || !scoreUrl) throw new TypeError('scoreUrl must be a nonempty URL');
+  if (!['notes', 'continuous'].includes(touch)) throw new TypeError('touch must be notes or continuous');
   if (!['hold', 'groove'].includes(mode)) throw new TypeError('mode must be hold or groove');
   if (mode === 'groove' && (!Number.isFinite(bpm) || bpm <= 0)) throw new TypeError('groove mode requires a positive bpm');
   if (activePlayer) throw new Error('Only one scroll score player can run on a page');
 
   let playback = mode === 'groove' ? { mode, bpm, character, gesture:true } : null;
-  const instrument = new ScrollInstrument(onNotes, onIdle, onError);
+  const instrument = new TextureInstrument(onNotes, onIdle, onError, { touch });
   let destroyed = false;
   let loading = 0;
   let frame = 0;
@@ -30,11 +32,13 @@ export async function createScrollScore({ contentElement, scoreUrl, mode = 'hold
     return next;
   };
   const sound = new SoundControl(instrument, { preferenceKey, onChange:() => onStateChange(sound.state, sound.control), onError });
+  if (!autoStart) sound.desired = false;
   instrument.setVolume(volume);
   const player = {
     get state() { return sound.state; },
     get control() { return sound.control; },
     get desired() { return sound.desired; },
+    get touch() { return instrument.touch; },
     get holding() { return instrument.holding; },
     get groove() { return instrument.groove; },
     get instrument() { return instrument; },
@@ -46,6 +50,10 @@ export async function createScrollScore({ contentElement, scoreUrl, mode = 'hold
     pause() { if (!destroyed) sound.pause(); },
     wake() { if (!destroyed) return sound.wake(); },
     setVolume(value) { if (!destroyed) instrument.setVolume(value); },
+    setTouch(value) {
+      if (destroyed) throw new Error('Player has been destroyed');
+      instrument.setTouch(value);
+    },
     async setScore(url, options = {}) {
       if (destroyed) throw new Error('Player has been destroyed');
       if (typeof url !== 'string' || !url) throw new TypeError('scoreUrl must be a nonempty URL');

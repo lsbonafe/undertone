@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Undertone — read a story, play its score</title><link rel="icon" href="../../assets/favicon.svg">
+ <link rel="stylesheet" href="study.css"><script type="module" src="study.js"></script>
+</head>
+<body>
+ <header><a class="brand" href="../../">undertone.</a><span>READ A STORY. PLAY ITS SCORE.</span></header>
+ <main>
+  <section class="opening">
+   <p class="eyebrow">SAME SCORE / DIFFERENT TOUCH</p><h1>Let the<br>sound open.</h1>
+   <p class="standfirst">Move through the page. A sustained sound slowly changes its colour, space and harmony beneath your hand.</p>
+   <div class="choices">
+    <div><span class="label">THE TOUCH</span><div class="switch" role="group" aria-label="Compare scroll responses"><button data-touch="continuous" aria-pressed="true">Continuous</button><button data-touch="notes" aria-pressed="false">Notes</button></div></div>
+    <label><span class="label">THE SCORE</span><select id="story"><option value="space">Wonder / the cosmos</option><option value="reef">Unease / the reef</option><option value="mall">Late night / the empty mall</option></select></label>
+   </div>
+   <p id="touch-description" class="description"></p>
+   <div class="sound-field" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  </section>
+  <section class="reading-intro"><div><p class="eyebrow">THE READING</p><h2 id="title"></h2><p id="intro"></p><p id="attribution"></p><p id="palette" class="palette"></p><a id="source" target="_blank" rel="noopener noreferrer">Original source →</a></div><div><img id="image" alt="" width="520" height="520"><p id="image-credit"></p></div></section>
+  <article id="reading" aria-label="Read and compare the two scroll responses"></article>
+  <section class="closing"><p class="eyebrow">STAY HERE A MOMENT</p><h2>The sound can settle.</h2><p>Stop scrolling and listen. Change the touch at the same position, then move back through the page.</p><a href="../../docs/texture-study.md" target="_blank" rel="noopener">How continuous touch works →</a></section>
+ </main>
+ <footer><span>UNDERTONE / SCROLL SCORES</span><span>Original scores. Two ways to play.</span></footer>
+ <aside class="transport" aria-label="Listening controls"><button id="play" data-scroll-score-toggle disabled aria-pressed="false">Preparing…</button><div class="transport-status"><strong id="status" role="status">Preparing the score…</strong><span id="hint">Press Play to begin.</span></div><div class="meter" aria-hidden="true"><i id="position"></i></div><span id="percent">00%</span><label>Volume<input id="volume" type="range" min="0" max="100" value="50"></label></aside>
+</body></html>
