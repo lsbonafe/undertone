@@ -1,0 +1,10 @@
+// Original quiet study: D major pentatonic, a D–A anchor and E/F-sharp/B colors.
+// Sparse material supplies sustained frames; scrolling never triggers these attacks.
+stack(
+  arrange(
+    [4, note("d3 e3 a3 fs3 e3 b3 fs3 a3").slow(4)],
+    [4, note("e3 fs3 a3 b3 fs3 e3 b3 a3").slow(4)],
+    [4, note("fs3 e3 b3 a3 e3 fs3 a3 d3").slow(4)]
+  ).s("sine").gain(0.2).orbit(1),
+  note("d2 a2").slow(4).s("sine").gain(0.08).orbit(2)
+)

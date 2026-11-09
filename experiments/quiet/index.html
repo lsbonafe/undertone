@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quiet — an Undertone sound experiment</title>
+  <link rel="icon" href="../../assets/favicon.svg"><link rel="stylesheet" href="./quiet.css">
+  <script type="module" src="./quiet.js"></script>
+</head>
+<body>
+  <header><a class="brand" href="../../">undertone.</a><span>LOCAL SOUND EXPERIMENT / 01</span></header>
+  <main>
+    <section class="opening" aria-labelledby="title">
+      <p class="eyebrow">LESS TO LISTEN FOR</p>
+      <h1 id="title">Stay with<br>the sound.</h1>
+      <p class="intro">Four quiet textures to try while reading, working, or taking a moment. Your scroll changes a little of the colour. The sound stays steady.</p>
+      <p class="small-note">Start quietly. These are listening comparisons, without a promise of better focus or relaxation.</p>
+    </section>
+    <section class="palette" aria-label="Choose a sound">
+      <button data-preset="brown" aria-pressed="true"><span class="number">01</span><svg viewBox="0 0 150 46" aria-hidden="true"><path d="M0 28Q38 0 75 24T150 24"/><path d="M0 36Q38 8 75 32T150 32"/></svg><strong>Brown noise</strong><span>A low, rounded rush.</span></button>
+      <button data-preset="pink" aria-pressed="false"><span class="number">02</span><svg viewBox="0 0 150 46" aria-hidden="true"><path d="M0 26Q12 10 25 24T50 24T75 24T100 24T125 24T150 24"/></svg><strong>Pink noise</strong><span>A softer rain-like hiss.</span></button>
+      <button data-preset="tones" aria-pressed="false"><span class="number">03</span><svg viewBox="0 0 150 46" aria-hidden="true"><path d="M0 14H150M0 24H150M0 34H150"/></svg><strong>Soft tones</strong><span>A held harmony, gently blended.</span></button>
+      <button data-preset="binaural" aria-pressed="false"><span class="number">04</span><svg viewBox="0 0 150 46" aria-hidden="true"><path d="M0 16Q12 0 25 16T50 16T75 16T100 16T125 16T150 16M0 34Q10 18 20 34T40 34T60 34T80 34T100 34T120 34T140 34"/></svg><strong>Binaural tones</strong><span>Two ears, two close frequencies.</span></button>
+    </section>
+    <section class="sound-description" aria-labelledby="sound-name">
+      <div><p class="eyebrow">NOW EXPLORING</p><h2 id="sound-name">Brown noise</h2><p id="sound-detail">More weight in the low frequencies, with very little to follow.</p></div>
+      <div class="gesture-note"><span class="gesture-mark" aria-hidden="true">↕</span><p id="scroll-detail">Scroll slowly to open a little more of its upper texture. Stop and it holds.</p><p id="headphone-note" hidden>Stereo headphones are needed for the binaural comparison.</p></div>
+    </section>
+    <article id="reading" aria-label="A quiet space to scroll">
+      <section><p class="eyebrow">01 / ARRIVE</p><h2>A little less<br>in the foreground.</h2><p>Choose a texture and press Play. Let it sit at a level where the room still feels present. There is no tune to catch, no next beat to anticipate.</p><p>The noise textures are different kinds of randomness. Pink has more air. Brown has more weight. The soft tones offer a small harmonic centre instead.</p><p>Move a little way down the page, then pause. Listen for the change in colour rather than a new note. Nothing needs to happen quickly.</p><span class="chapter-line" aria-hidden="true"></span></section>
+      <section><p class="eyebrow">02 / NOTICE</p><h2>Movement can<br>stay small.</h2><p>Scrolling opens the sound's upper texture. With soft tones, it also blends one harmonic colour into another. A quicker gesture adds a brief brightness that settles when you stop, while keeping loudness restrained.</p><p>The binaural example holds 180 Hz in the left ear. Scrolling changes the right tone smoothly, with a separation of 6–12 Hz, and opens the pink-noise bed beneath it.</p><p>Turn Scroll response off to compare the same sound without movement. Silence is a useful comparison too: Pause stops every layer.</p><span class="chapter-line" aria-hidden="true"></span></section>
+      <section><p class="eyebrow">03 / STAY</p><h2>No destination<br>to reach.</h2><p>Stop here for a moment. The current texture stays with you; its small response to movement settles without playing more notes.</p><p>Try another sound at the same volume. A lower or smoother sound is not automatically more useful. Notice whether it leaves room for what you want to do.</p><p>You can keep listening with this tab in the background. Returning up the page traces the same range of colours.</p><span class="chapter-line" aria-hidden="true"></span></section>
+    </article>
+    <details class="evidence">
+      <summary>What does the research actually say?</summary>
+      <p>A 2024 review found a small benefit from white/pink noise on laboratory tasks in young people with ADHD or elevated attention difficulties. It does not establish a benefit for everyone, and found no brown-noise studies. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11283987/" target="_blank" rel="noopener noreferrer">Read the noise review ↗</a></p>
+      <p>Binaural-beat studies report inconsistent brainwave-entrainment findings. The two-tone example demonstrates the sound, without claiming it changes your brain state. <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0286023" target="_blank" rel="noopener noreferrer">Read the binaural-beat review ↗</a></p>
+      <p>Music-based interventions have some evidence for stress-related outcomes. This original, scroll-controlled harmony has not been evaluated for those effects. <a href="https://www.nccih.nih.gov/health/music-and-health-what-you-need-to-know" target="_blank" rel="noopener noreferrer">NCCIH: music and health ↗</a></p>
+    </details>
+    <footer><span>UNDERTONE / QUIET</span><span>Continuous sound. Subtle touch.</span></footer>
+  </main>
+  <aside class="transport" aria-label="Sound controls">
+    <button id="play" data-scroll-score-toggle disabled aria-pressed="false">Preparing…</button>
+    <div class="status"><strong id="status" role="status">Preparing the sounds…</strong><span id="gesture-status">Continuous sound / no note attacks</span></div>
+    <label class="response"><input id="responsive" type="checkbox" checked> Scroll response</label>
+    <label class="volume">Volume <input id="volume" type="range" min="0" max="60" value="25"><output id="volume-value" for="volume">25%</output></label>
+  </aside>
+  <noscript><p class="noscript">Enable JavaScript to try this sound experiment.</p></noscript>
+</body>
+</html>
