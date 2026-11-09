@@ -1,5 +1,5 @@
 import {stories} from '../../stories.js';
-import {createScrollScore} from '../../scroll-player.js';
+import {createScrollScore} from '../../scroll-player.js?v=continuous-api-1';
 
 const $=id=>document.getElementById(id),root=new URL('../../',import.meta.url);
 const query=new URLSearchParams(location.search);
