@@ -16,7 +16,9 @@ At a slow scroll, attacks are spaced further apart. At a fast scroll, the player
 
 ### Continuous touch
 
-Set `touch: 'continuous'` to interpret the foreground as twelve slowly blended harmonic frames. It uses the score's pitch collection with a shared pedal and a lower color register; scroll speed shapes level, brightness and stereo. This replaces the foreground instrument and its note attacks with a sustained texture. Identify the foreground on **orbit 1** for predictable selection. Both hold and groove modes support either touch. See [continuous touch](texture-study.md).
+Set `touch: 'continuous'` to interpret the foreground as twelve slowly blended harmonic frames. It uses the score's pitch collection with a shared pedal and a lower color register; scroll speed shapes level, brightness and stereo. Its sustained sound family follows the foreground instrument: glass, reeds, strings, organ, metallic FM, tape or vowel choir. Short sample attacks become a sustained harmonic reconstruction. Identify the foreground on **orbit 1** for predictable pitch and sound selection. Both hold and groove modes support either touch. See [continuous touch](texture-study.md).
+
+For a deep bass study, keep the entire foreground between C1 and G♯2 and start on C2 or below. Continuous touch preserves that opening bass root and blends colors in its octave, using a dark, fundamental-heavy voice. [`depths.strudel`](../scores/depths.strudel) demonstrates a D1–A1 foundation. A low accompaniment alone does not activate this register; the foreground must be low too.
 
 ### Hold mode
 

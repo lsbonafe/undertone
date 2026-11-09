@@ -457,11 +457,30 @@ Nina rewound to the pool. This time she noticed the cleaning trolley behind the 
     scoreText:'The line ducks into side streets and returns to the same destination. A steady beat carries the journey while your scroll changes its energy.',
     theory:'D Dorian and a D-centered bass keep each four-bar passage related. The broken beat continues at 116 BPM during a reading pause. Scrolling plays a separate metallic FM line, moving forward or back through its notes with your hand. Faster movement adds more notes and a few grid-aligned hats. A pause lets the foreground ring out; background passages change at bar boundaries.',
     learn:[{label:'Learn resonant filters and envelopes',url:'https://strudel.cc/learn/effects/'},{label:'Learn rhythmic mini-notation',url:'https://strudel.cc/learn/mini-notation/'}],
-    next:'space',nextLabel:'Wonder / the cosmos',
+    next:'depths',nextLabel:'Below the surface / deep bass',
     chapters:[
       {title:'A parcel with no explanation.',text:'The parcel was light enough to feel empty. Its label gave a tower, a floor and a name, with BEFORE SUNRISE written beneath them. Jo took the job because it was on the way home. Half an hour later, the city’s temporary road closures had made that description meaningless.',cue:'The kick pattern leaves gaps for a resonant bass phrase and the snare’s reply.'},
       {title:'The city changes the route.',text:'She followed the signed diversion, then the route suggested by a cleaner outside an all-night café. The tower appeared and disappeared between other buildings. A delivery van waited beside the wrong entrance. Her phone had enough battery to tell her that the customer was still watching the map.',cue:'The filter envelope becomes deeper. Metallic FM accents flash above the broken beat.'},
       {title:'The smallest possible ending.',text:'On the twenty-first floor, a man opened the door before she knocked. Inside the parcel was a soft toy with one ear repaired. He thanked her quietly and carried it toward a room where a small light was still on. Jo took the lift down. The sky was beginning to change.',cue:'The phrase returns toward D. Pause to repeat this groove; the metallic accents recede while the bass and drums carry on.'}
+    ]
+  },
+  depths: {
+    number:'21',category:'FICTION / DEEP BASS',feeling:'Depth',navTitle:'Below the surface',navSubject:'deep bass',fictional:true,
+    title:'Below the surface.<br><em>Stay a moment.</em>',titleText:'Fiction: below the surface',
+    intro:'A night watch on a quiet vessel. A small light descends into water that gives nothing back.',
+    publisher:'Undertone · Fiction',date:'Original short fiction',
+    image:'./assets/images/depths.svg',imageAlt:'Original illustration of a small suspended light descending through dark blue layers of water.',
+    imageTag:'DEEP BASS / BELOW THE SURFACE',imageCredit:'Original illustration for Undertone',
+    score:'./scores/depths.strudel',scale:'D minor pentatonic',pitches:['D','F','G','A','C'],pitchClasses:[2,5,7,9,0],
+    texture:'A deep sine foundation, soft bass harmonics and slowly changing low tones.',technique:'Sub-bass synthesis and restrained harmonic blending',
+    method:'A D1 foundation at about 36.7 Hz supports an A1 fifth and low pentatonic colors. Gentle upper harmonics give the bass some definition while scrolling opens the low-pass filter.',
+    scoreText:'The sound stays beneath the reading, like a distant engine felt through the deck.',
+    theory:'D–F–G–A–C forms a minor pentatonic collection. The D–A motif anchors all three passages in either direction. Continuous touch preserves the authored bass register instead of folding it upward; stopping holds the current low harmony. The water and engine are fictional analogies, not field recordings.',
+    next:'space',nextLabel:'Wonder / the cosmos',
+    chapters:[
+      {title:'The deck is still warm.',text:'Mara rested a hand on the rail. Behind her, the cabin window held a square of yellow light. Ahead there was only water, dark enough to erase the horizon. The engine had stopped, but a faint vibration remained in the deck. She waited until she could no longer tell whether it came from the boat or from her hand.',cue:'A D1 foundation and A1 fifth hold the first low colors. Move slowly to hear the bass swell.'},
+      {title:'A light goes under.',text:'The lamp lowered a little at a time. For a moment its cable seemed to reach a second boat beneath them. Then the shape loosened into a pale circle and disappeared. Mara kept watching the place where it had been. Beside her, the reel turned, stopped, and turned again. Nobody needed to say how much line was left.',cue:'F, G and C blend close to the bass foundation. Faster scrolling opens their soft harmonics.'},
+      {title:'Nothing needs to arrive.',text:'When the cable went still, she sat beside the rail. A mug had left a wet ring on the bench. She moved it into the cabin light, then brought it back. Below the boat, the lamp was holding its small patch of water. Above it, she had the same task: remain here, leave enough room, and let her eyes adjust.',cue:'The phrase settles toward D. Stop anywhere to hold the low harmony; scroll upward to retrace it.'}
     ]
   }
 };

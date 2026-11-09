@@ -2,7 +2,7 @@
 
 [Back to the project README](../README.md)
 
-The first ten are original short summaries, not reproductions of the full articles. Source dates distinguish historical reporting from a current update. Readings 11–20 are original fiction, labeled in the navigation, category, attribution and introductory note; they have no external article link or purported reporting date. Word counts and estimated reading times appear beside the attribution. Longer chapters have paragraph breaks, and short readings use a more compact layout.
+The first ten are original short summaries, not reproductions of the full articles. Source dates distinguish historical reporting from a current update. Readings 11–21 are original fiction, labeled in the navigation, category, attribution and introductory note; they have no external article link or purported reporting date. Word counts and estimated reading times appear beside the attribution. Longer chapters have paragraph breaks, and short readings use a more compact layout.
 
 1. **Wonder / space:** [NASA’s Webb Takes Star-Filled Portrait of Pillars of Creation](https://science.nasa.gov/missions/webb/nasas-webb-takes-star-filled-portrait-of-pillars-of-creation/), NASA, 19 October 2022.
 2. **Unease / climate:** [NOAA confirms 4th global coral bleaching event](https://www.noaa.gov/news-release/noaa-confirms-4th-global-coral-bleaching-event), NOAA, 15 April 2024.
@@ -24,3 +24,4 @@ The first ten are original short summaries, not reproductions of the full articl
 18. **After hours / mallsoft vaporwave — 169 words:** a repair shop outlasts the shopping mall around it. Detuned major-nine pads, slow pitch drift, filtered reflections and a muffled backbeat suggest an abandoned commercial memory.
 19. **Room 409 / VHS vaporwave — 301 words:** a home video preserves a holiday hotel. An original electric-key chord plays at half speed, with dark echoes, stereo movement and a sparse beat.
 20. **Last delivery / acid electro — 148 words:** a courier follows diversions across a night city. Syncopated kicks, a snare backbeat, a squelching resonant bass and short metallic accents follow the journey.
+21. **Below the surface / deep bass:** a night watch follows a small lamp into dark water. D1 (36.7 Hz), A1 and low D minor pentatonic colors form a sustained bass texture. Continuous touch preserves the low register, with restrained harmonics and no percussion.

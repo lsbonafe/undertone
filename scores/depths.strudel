@@ -1,0 +1,10 @@
+// Undertone 21 — Below the surface. Original D minor pentatonic bass study.
+// D1 (36.7 Hz) and A1 anchor a D–F–G–A–C motif; no percussion or high lead.
+stack(
+  arrange(
+    [4, note("d1 a1 f1 g1 d1 f1 a1 c2 d1 a1 g1 f1 c2 a1 f1 d1").slow(4)],
+    [4, note("d1 f1 g1 c2 a1 g1 f1 d1 f1 a1 c2 g1 a1 f1 g1 d1").slow(4)],
+    [4, note("d1 a1 f1 d1 g1 f1 a1 d2 c2 a1 g1 f1 a1 g1 f1 d1").slow(4)]
+  ).s("sine").gain(0.24).attack(0.08).decay(0.14).sustain(0.6).release(0.24).lpf(220).orbit(1),
+  note("d1 a1 d1 a1").slow(4).s("triangle").gain(0.08).attack(0.1).release(0.25).lpf(180).orbit(2)
+)

@@ -9,7 +9,7 @@ const strudel=await import('../assets/vendor/strudel.mjs');
 const {compileScore}=await import('../music.js');
 const {FlowTexture,TextureInstrument,textureShape}=await import('../texture.js');
 const scores=new Map();
-for(const id of ['space','reef','mall'])scores.set(id,await compileScore(await readFile(new URL(`../scores/${id}.strudel`,import.meta.url),'utf8')));
+for(const id of ['space','reef','mall','depths'])scores.set(id,await compileScore(await readFile(new URL(`../scores/${id}.strudel`,import.meta.url),'utf8')));
 
 test('flowing harmony renders slow, fast, reverse and stopped motion without retuning or creating voices',async t=>{
  const rate=24000;
@@ -163,6 +163,47 @@ test('a faster gesture gives the same harmonic target more level and brightness'
  t.diagnostic(`Same harmonic target, fast/slow rendered RMS ratio ${ratio.toFixed(2)}x.`);
 });
 
+test('sound families render distinct spectra on identical harmony and stop all modulation sources',async t=>{
+ const rate=24000,signatures=[];
+ const families=[['sine',{}],['triangle',{}],['sawtooth',{}],['user',{partials:[1,.28,.16,.1,.06,.04]}],['sine',{fmi:.8,fmh:2}],['porcelain',{}],['haze',{}],['sawtooth',{vowel:'a'}]];
+ for(const [s,extra] of families){
+  const events=Array.from({length:48},(_,index)=>({onset:index/4,value:{s,note:['d3','a3','e4','fs4'][index%4],gain:.2,orbit:1,...extra}}));
+  const context=new webaudio.OfflineAudioContext(2,rate*4,rate),texture=new FlowTexture(context,context.destination,events,.3);
+  const sources=[...texture.sources];
+  for(let frame=0;frame<160;frame++){
+   const at=frame/50;if(frame===60)texture.input(.31,at,6);texture.tick(at);
+  }
+  assert.deepEqual(texture.sources,sources,'scrolling allocates no extra sources');
+  assert.ok(sources.length<=40,'carriers and modulation remain bounded');
+  texture.stop(3.3);const audio=await context.startRendering(),samples=audio.getChannelData(0);
+  let peak=0;for(let channel=0;channel<2;channel++)for(const sample of audio.getChannelData(channel)){assert.ok(Number.isFinite(sample));peak=Math.max(peak,Math.abs(sample))}
+  assert.ok(peak>.005&&peak<.8,`${texture.timbre.kind}: headroom ${peak}`);
+  assert.ok(samples.subarray(rate*3.6).every(value=>Math.abs(value)<1e-6),'mute also stops FM and tape wow');
+  const fingerprint=(from,to)=>{
+   const begin=Math.round(from*rate),end=Math.round(to*rate),values=[];
+   // Compare upper partials; all renders have exactly the same notes and pedal.
+   for(const note of [50,57,64,66])for(let harmonic=2;harmonic<=8;harmonic++){
+    const frequency=440*2**((note-69)/12)*harmonic;let real=0,imag=0;
+    for(let index=begin;index<end;index++){
+     const window=.5-.5*Math.cos(2*Math.PI*(index-begin)/(end-begin-1)),phase=2*Math.PI*frequency*index/rate;
+     real+=samples[index]*window*Math.cos(phase);imag+=samples[index]*window*Math.sin(phase);
+    }
+    values.push(Math.hypot(real,imag));
+   }
+   const sum=values.reduce((total,value)=>total+value,0);assert.ok(sum>.01,'harmonic detail is present');
+   return values.map(value=>value/sum);
+  };
+  signatures.push({kind:texture.timbre.kind,rest:fingerprint(.7,1.1),moving:fingerprint(1.5,1.9)});
+ }
+ for(let left=0;left<signatures.length;left++)for(let right=left+1;right<signatures.length;right++){
+  for(const state of ['rest','moving']){
+   const distance=signatures[left][state].reduce((sum,value,index)=>sum+Math.abs(value-signatures[right][state][index]),0);
+   assert.ok(distance>.12,`${signatures[left].kind}/${signatures[right].kind} ${state}: spectral distance ${distance}`);
+  }
+ }
+ t.diagnostic('Eight sound families have distinct normalized upper-partial spectra at rest and during movement on the same notes.');
+});
+
 test('the full reading catalogue supports continuous rendering with finite output and headroom',async()=>{
  const rate=24000;
  for(const [id,story] of Object.entries(stories)){
@@ -174,4 +215,27 @@ test('the full reading catalogue supports continuous rendering with finite outpu
   for(let channel=0;channel<2;channel++)for(const sample of audio.getChannelData(channel)){assert.ok(Number.isFinite(sample),id);peak=Math.max(peak,Math.abs(sample))}
   assert.ok(peak>.001&&peak<.8,`${id}: peak ${peak}`);
  }
+});
+
+test('the deep bass render carries a D1 fundamental and concentrates its energy below 120 Hz',async t=>{
+ const rate=24000,context=new webaudio.OfflineAudioContext(2,rate*4,rate);
+ const texture=new FlowTexture(context,context.destination,scores.get('depths').events,.3);
+ const low=context.createBiquadFilter();low.type='lowpass';low.frequency.value=120;
+ // Web Audio low-pass Q is in dB: -3.01 dB gives a non-resonant Butterworth response.
+ low.Q.value=-3.0103;
+ const split=context.createChannelMerger(2);texture.bus.disconnect();
+ texture.bus.connect(split,0,0);texture.bus.connect(low);low.connect(split,0,1);split.connect(context.destination);
+ for(let frame=0;frame<160;frame++)texture.tick(frame/50);
+ texture.stop(3.3);const audio=await context.startRendering();
+ const original=audio.getChannelData(0),filtered=audio.getChannelData(1),begin=rate,end=rate*3;
+ let total=0,bass=0,real=0,imag=0;
+ for(let i=begin;i<end;i++){
+  total+=original[i]**2;bass+=filtered[i]**2;
+  const phase=2*Math.PI*(440*2**((26-69)/12))*i/rate;
+  real+=original[i]*Math.cos(phase);imag+=original[i]*Math.sin(phase);
+ }
+ assert.ok(bass/total>.8&&bass/total<=1.01,`bass energy ratio ${bass/total}`);
+ assert.ok(Math.hypot(real,imag)/(end-begin)>.005,'D1 is present in the rendered signal');
+ assert.ok(original.subarray(rate*3.6).every(value=>Math.abs(value)<1e-6),'the deep layer mutes');
+ t.diagnostic(`Deep bass: ${(100*bass/total).toFixed(1)}% of measured energy retained after a 120 Hz low-pass.`);
 });

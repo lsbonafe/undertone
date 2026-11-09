@@ -5,7 +5,7 @@ import {stories} from '../stories.js';
 import {pitchClassOf} from '../motion.js';
 globalThis.window=new EventTarget();globalThis.document=new EventTarget();
 const {compileScore}=await import('../music.js');
-const {textureVoicings,textureShape,textureMelody,textureColorMix,HARMONY_RESPONSE}=await import('../texture.js');
+const {textureVoicings,textureShape,textureMelody,textureColorMix,textureTimbre,HARMONY_RESPONSE}=await import('../texture.js');
 const openings={space:[62,69,76,78,69,76,78,80],reef:[50,57,63,62,65,63,62,57],mall:[74,73,69,66,64,66,69,71]};
 for(const id of ['space','reef','mall']){
  const score=await compileScore(await readFile(new URL(`../scores/${id}.strudel`,import.meta.url),'utf8'));
@@ -56,4 +56,25 @@ test('scroll energy opens harmonic detail and stereo movement with a bounded vol
  assert.equal(backward.pan,-forward.pan);assert.ok(forward.pan>=.4&&forward.pan<=.45);
  assert.ok(forward.cutoff-still.cutoff>=5000);assert.ok(forward.color/still.color>2);
  assert.ok(forward.level/still.level<1.5);assert.deepEqual(textureVoicings([]),[]);
+});
+
+test('continuous sound families follow the authored foreground across the catalogue',async()=>{
+ const families={space:'glass',reef:'reed',erosion:'strings',fireflies:'organ',bell:'metal',porcelain:'porcelain',library:'choir',mall:'metal',vhs:'tape',depths:'bass'};
+ for(const [id,kind] of Object.entries(families)){
+  const score=await compileScore(await readFile(new URL(`../scores/${id}.strudel`,import.meta.url),'utf8'));
+  assert.equal(textureTimbre(score.events).kind,kind,id);
+ }
+ const event=(s,gain,orbit,extra={})=>({onset:0,value:{note:'d4',s,gain,orbit,...extra}});
+ assert.equal(textureTimbre([event('sawtooth',.9,2),event('sine',.1,1,{fmi:.8})]).kind,'metal','an explicit lead wins over louder backing');
+ assert.equal(textureTimbre([event('triangle',.1,0),event('sawtooth',.3,0)]).kind,'strings','older scores use the loudest authored layer');
+ assert.equal(textureTimbre([]).kind,'glass');
+});
+
+test('the deep bass study preserves D1 and low colors instead of folding them into the normal register',async()=>{
+ const score=await compileScore(await readFile(new URL('../scores/depths.strudel',import.meta.url),'utf8'));
+ const voicings=textureVoicings(score.events);
+ assert.ok(voicings.every(notes=>notes[0]===26&&notes[1]===33),'D1 and A1 remain the foundation');
+ assert.ok(voicings.flat().every(note=>note>=26&&note<=38),'every continuous pitch is between 36.7 and 73.4 Hz');
+ assert.ok(new Set(voicings.map(notes=>notes.join(','))).size>=4,'the low harmony still changes');
+ for(const notes of voicings)assert.ok(notes.every(note=>stories.depths.pitchClasses.includes(pitchClassOf(note))));
 });

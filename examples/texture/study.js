@@ -1,5 +1,6 @@
 import {stories} from '../../stories.js';
 import {createScrollScore} from '../../scroll-player.js?v=continuous-api-1';
+import {textureTimbre} from '../../texture.js';
 
 const $=id=>document.getElementById(id),root=new URL('../../',import.meta.url);
 const query=new URLSearchParams(location.search);
@@ -15,7 +16,11 @@ function sync(){
  $('play').setAttribute('aria-pressed',String(playing));
  $('status').textContent=!scoreReady?'Loading the score…':!wanted?'Sound paused':state!=='playing'?state==='error'?'Sound needs another try':'Tap Play to enable sound':touch==='continuous'?'Flowing texture':'Scroll-played notes';
  $('hint').textContent=touch==='continuous'?'Move slowly to soften. Faster to swell.':'Scroll to hear separate notes. Stop to hold.';
- $('touch-description').textContent=touch==='continuous'?'A low, layered sound follows your movement. Notes blend within the harmony; scrolling faster gives it more presence, and stopping lets it soften.':'Individual note groups follow your scrolling, above a held harmony or continuing backing.';
+ $('touch-description').textContent=touch==='continuous'?'Glass, reeds, strings, voices: each score has its own sustained sound. Move to open its colour and blend the harmony; stop to let it settle.':'Individual note groups follow your scrolling, above a held harmony or continuing backing.';
+ if(scoreReady){
+  const sound=touch==='continuous'?textureTimbre(player.instrument.events).label:'Authored instruments';
+  $('palette').textContent=`${activeStory.scale} / ${activeStory.playback?.bpm?`${activeStory.playback.bpm} BPM / `:''}${sound}`;
+ }
  document.querySelectorAll('[data-touch]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.touch===touch)));
 }
 function motion(progress){
