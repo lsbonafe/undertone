@@ -1,0 +1,7 @@
+// Original example: a small D major phrase that works in either direction.
+stack(
+  note("d4 fs4 a4 b4 a4 fs4 e4 d4").slow(4).s("sine")
+    .gain(0.24).attack(0.02).release(0.3).lpf(3500),
+  note("d3 a3 d3 a3").slow(4).s("triangle")
+    .gain(0.08).attack(0.04).release(0.4).lpf(1400)
+)

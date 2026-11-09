@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "exports": {
+    "./player": "./scroll-player.js"
+  },
   "scripts": {
     "start": "node serve.mjs",
     "build": "node build.mjs",

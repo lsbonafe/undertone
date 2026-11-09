@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A small scroll score</title>
+<style>
+  body { margin:0; background:#f5f1e9; color:#242b30; font:18px/1.7 Georgia,serif; }
+  header, article { max-width:42rem; margin:auto; padding:2rem; }
+  header { position:sticky; top:0; background:#f5f1e9ee; display:flex; gap:1rem; align-items:center; border-bottom:1px solid #aaa; }
+  button { padding:.6rem 1rem; font:inherit; cursor:pointer; }
+  article section { min-height:85vh; }
+  small { display:block; color:#52606b; }
+</style>
+<header><button id="sound" data-scroll-score-toggle aria-pressed="false">Enable sound</button><small id="status" role="status">Loading score…</small></header>
+<article id="article">
+  <h1>Rain in the garden</h1>
+  <section><p>The first drops land on the leaves. Scroll slowly and listen to the short phrase.</p></section>
+  <section><p>The path darkens. Move back up to hear the notes in reverse.</p></section>
+  <section><p>The rain settles. Stop moving and let the harmony stay where you left it.</p></section>
+</article>
+<script type="module" src="./main.js"></script>
+</html>

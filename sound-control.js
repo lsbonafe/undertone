@@ -1,14 +1,15 @@
 const PREFERENCE_KEY = 'undertone.sound';
 
 export class SoundControl {
-  constructor(instrument, { storage, onChange = () => {}, onError = () => {} } = {}) {
+  constructor(instrument, { storage, preferenceKey = PREFERENCE_KEY, onChange = () => {}, onError = () => {} } = {}) {
     this.instrument = instrument;
     this.onChange = onChange;
     this.onError = onError;
+    this.preferenceKey = preferenceKey;
     this.desired = true;
     try {
       this.storage = storage ?? globalThis.localStorage;
-      this.desired = this.storage?.getItem(PREFERENCE_KEY) !== 'off';
+      this.desired = this.storage?.getItem(this.preferenceKey) !== 'off';
     } catch { /* Sound still works when browser storage is unavailable. */ }
     this.pending = null;
     this.failed = false;
@@ -39,7 +40,7 @@ export class SoundControl {
   }
 
   remember() {
-    try { this.storage?.setItem(PREFERENCE_KEY, this.desired ? 'on' : 'off'); } catch { /* Keep the choice for this visit. */ }
+    try { this.storage?.setItem(this.preferenceKey, this.desired ? 'on' : 'off'); } catch { /* Keep the choice for this visit. */ }
   }
 
   start() {
@@ -94,5 +95,12 @@ export class SoundControl {
     this.desired = true;
     this.remember();
     return this.pending ? this.wake() : this.start();
+  }
+
+  dispose() {
+    this.observedContext?.removeEventListener?.('statechange', this.contextChanged);
+    this.observedContext = null;
+    this.pending = null;
+    this.instrument.mute();
   }
 }

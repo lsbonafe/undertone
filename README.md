@@ -2,7 +2,7 @@
 
 **Read a story. Play its score with your hand.**
 
-[Listen on GitHub Pages](https://lsbonafe.github.io/undertone/) · [Browse the 20 readings](docs/readings.md) · [Open a Strudel score](scores/space.strudel)
+[Listen on GitHub Pages](https://lsbonafe.github.io/undertone/) · [Try the standalone player](https://lsbonafe.github.io/undertone/examples/hello/) · [Browse the 20 readings](docs/readings.md) · [Open a Strudel score](scores/space.strudel)
 
 Undertone turns scrolling into musical phrasing. Twenty readings pair a subject with an original score: ten source-linked adaptations and ten clearly labeled fictional stories. The score supplies a musical vocabulary; the reader supplies motion, direction and pauses.
 
@@ -10,13 +10,45 @@ Undertone turns scrolling into musical phrasing. Twenty readings pair a subject 
 
 Sound is **requested on by default**, but the control shows actual playback state. Where autoplay is permitted, music starts automatically. Otherwise, **Enable sound** remains visible until a click, tap or keypress unlocks audio; the first Enable click resumes the pending start instead of toggling it off. **Pause sound** appears when playback starts or is initializing, and the pressed indicator is only on while audio is running. A pause choice is remembered in that browser. Scrolling alone may not unlock browser audio; this follows the browser's [autoplay policy](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay).
 
+## Use the player in another project
+
+The browser module [`scroll-player.js`](scroll-player.js) plays a trusted `.strudel` file against an existing article element. The host page supplies its own text and controls; no server API or account is needed. [The small independent example](examples/hello/index.html) uses only its own HTML, a score, and this module.
+
+For a bundled JavaScript project, install the repository from GitHub. Pin the resolved commit SHA for reproducible builds:
+
+```sh
+npm install "github:lsbonafe/undertone#main"
+```
+
+```js
+import { createScrollScore } from 'undertone-scroll-scores/player';
+
+const player = await createScrollScore({
+  contentElement: document.querySelector('article'),
+  scoreUrl: '/music/story.strudel',
+  onStateChange: (state, control) => {
+    button.textContent = control.label;
+    button.setAttribute('aria-pressed', String(control.pressed));
+  },
+});
+button.addEventListener('click', () => player.toggle());
+// When removing the article: player.destroy();
+```
+
+`contentElement` must be attached to the document; this version listens to **page scrolling**, using that element's position and height as the musical range. One player can run per page. The default `mode: 'hold'` lets the current harmony continue when movement stops. For a steady backing groove, pass `mode: 'groove'`, a positive `bpm`, and optionally `character: 'vaporwave'` (the other supported character is `'electronic'`). Groove scores place the scroll-played lead on **orbit 1**. Both modes use the current 12-cycle score shape; groove divides it into three four-bar passages. Built-in custom sound names include `haze`, `grit`, `porcelain`, `u_tape`, `u_kick`, `u_hat`, and `u_snare`.
+
+The returned player exposes `state`, `control`, `desired`, `enable()`, `toggle()`, `pause()`, `setVolume(0..1)`, `setScore(url, options?)`, and `destroy()`. `enable()` is idempotent; `toggle()` powers the visible button. `onStateChange(state, control)` reports `waiting`, `starting`, `playing`, `paused`, or `error`; `control` supplies the correct button label and pressed state. Optional callbacks are `onProgress(progress)`, `onNotes(notes, direction, mode, foreground)`, `onIdle(phase, heldNotes)`, and `onError(error)`. `autoStart: false` disables the default startup attempt; `preferenceKey` names the localStorage choice for each integration. Call `destroy()` when removing the article to mute audio and remove listeners.
+
+Only load scores trusted by the site owner. The current Strudel compiler evaluates score code; it does not sandbox visitor submissions. The code and original scores are [AGPL-3.0-or-later](LICENSE), including when reused from GitHub.
+
 ## The stack, from article to speaker
 
 ```mermaid
 flowchart TB
     A["stories.js<br/>Article, scale, palette, playback mode"] --> P["Page<br/>HTML + CSS + main.js"]
     S["scores/*.strudel<br/>Original notes, rhythms, synths and effects"] --> C["Vendored @strudel/web 1.3.0<br/>Compile mini-notation into timed events"]
-    P --> I["Scroll input<br/>Position · direction · viewport-relative speed"]
+    P --> L["scroll-player.js<br/>Reusable browser API"]
+    L --> I["Scroll input<br/>Position · direction · viewport-relative speed"]
     I --> R["motion.js<br/>Scroll-led phrasing"]
     I --> G["groove.js<br/>Steady backing + scroll-played lead"]
     C --> R

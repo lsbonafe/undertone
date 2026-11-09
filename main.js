@@ -1,23 +1,15 @@
 import { stories, readingWordCount } from './stories.js';
-import { scrollProgress, pitchClassOf } from './motion.js';
-import { SoundControl } from './sound-control.js';
+import { pitchClassOf } from './motion.js';
+import { createScrollScore } from './scroll-player.js';
 
 const $ = id => document.getElementById(id);
-const scores = new Map();
 const initialSubjects = { space:'the cosmos', reef:'our oceans', orchestra:'human ingenuity' };
 document.querySelector('.story-nav').innerHTML = Object.entries(stories).map(([id, story]) => `<a href="?story=${id}" data-story-link="${id}"><span>${story.number}</span> ${story.navTitle ?? story.feeling} <span class="nav-subject">/ ${story.navSubject ?? initialSubjects[id]}</span><span class="nav-arrow" aria-hidden="true">↗</span></a>`).join('');
-let instrument;
-let sound;
+let player;
 let activeStory;
 let routeEpoch = 0;
-let ignoreScroll = true;
-let frame;
 let activeNotesTimer;
 let audioError = false;
-
-function currentProgress() {
-  return scrollProgress(window.scrollY, document.documentElement.scrollHeight, window.innerHeight);
-}
 
 function updateProgress(progress) {
   $('reading-progress').textContent = `${Math.round(progress * 100).toString().padStart(2, '0')}%`;
@@ -26,7 +18,7 @@ function updateProgress(progress) {
   bars.forEach((bar, index) => bar.classList.toggle('played', index / bars.length < progress));
 }
 
-function idle(phase = instrument?.holding ? instrument?.groove ? 'loop' : 'hold' : 'quiet', held = []) {
+function idle(phase = player?.holding ? player?.groove ? 'loop' : 'hold' : 'quiet', held = []) {
   if (phase === 'quiet') {
     clearTimeout(activeNotesTimer);
     document.querySelectorAll('[data-pitch-class]').forEach(dot => dot.classList.remove('active'));
@@ -39,16 +31,16 @@ function idle(phase = instrument?.holding ? instrument?.groove ? 'loop' : 'hold'
       document.querySelectorAll('[data-pitch-class]').forEach(dot => dot.classList.toggle('active', pitches.includes(Number(dot.dataset.pitchClass))));
     }
   }
-  $('transport-status').textContent = audioError ? 'Sound needs another try' : sound?.state === 'playing' ? phase === 'loop' ? 'Looping this passage' : phase === 'hold' ? 'Holding this moment' : 'Ready for your scroll' : sound?.desired === false ? 'Sound paused' : sound?.state === 'starting' ? 'Opening sound…' : 'Click, tap or press a key to start sound';
+  $('transport-status').textContent = audioError ? 'Sound needs another try' : player?.state === 'playing' ? phase === 'loop' ? 'Looping this passage' : phase === 'hold' ? 'Holding this moment' : 'Ready for your scroll' : player?.desired === false ? 'Sound paused' : player?.state === 'starting' ? 'Opening sound…' : 'Click, tap or press a key to start sound';
   $('transport-hint').textContent = phase === 'loop' ? 'Scroll to play the lead' : phase === 'hold' ? 'Scroll when you’re ready' : activeStory?.playback?.mode === 'groove' ? 'A steady groove · your scroll plays the lead' : 'Your scroll sets the phrasing';
 }
 
 function updateSoundControl() {
   $('sound-toggle').disabled = false;
-  $('sound-toggle').setAttribute('aria-pressed', String(sound.control.pressed));
-  $('sound-toggle').dataset.state = sound.state;
-  $('sound-label').textContent = sound.control.label;
-  if (sound.state === 'playing') audioError = false;
+  $('sound-toggle').setAttribute('aria-pressed', String(player.control.pressed));
+  $('sound-toggle').dataset.state = player.state;
+  $('sound-label').textContent = player.control.label;
+  if (player.state === 'playing') audioError = false;
   idle();
 }
 
@@ -82,9 +74,7 @@ async function loadStory(id, { navigate = false } = {}) {
   const story = stories[id] ?? stories.space;
   const epoch = ++routeEpoch;
   activeStory = story;
-  ignoreScroll = true;
-  instrument?.silence();
-  instrument?.setScore([], 0);
+  player?.instrument.silence();
   if (navigate) history.pushState({ story: id }, '', `?story=${id}`);
   document.body.dataset.story = id;
   const words = readingWordCount(story);
@@ -167,24 +157,11 @@ async function loadStory(id, { navigate = false } = {}) {
   window.scrollTo({ top: 0, behavior: 'instant' });
   updateProgress(0);
   idle();
-  if (instrument) {
+  if (player) {
     try {
-      if (!scores.has(id)) {
-        const response = await fetch(story.score);
-        if (!response.ok) throw new Error(`Cannot load score: ${response.status}`);
-        const { compileScore } = await import('./music.js');
-        scores.set(id, await compileScore(await response.text()));
-      }
-      if (epoch !== routeEpoch) return;
-      instrument.setScore(scores.get(id).events, currentProgress(), story.playback);
-    } catch (error) { if (epoch === routeEpoch) reportError(error); }
+      await player.setScore(story.score, story.playback ?? { mode:'hold' });
+    } catch { /* The player reports score errors through onError. */ }
   }
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    if (epoch === routeEpoch) {
-      instrument?.setPosition(currentProgress());
-      ignoreScroll = false;
-    }
-  }));
 }
 
 document.addEventListener('click', event => {
@@ -195,48 +172,20 @@ document.addEventListener('click', event => {
 });
 
 window.addEventListener('popstate', () => loadStory(new URLSearchParams(location.search).get('story') ?? 'space'));
-window.addEventListener('scroll', () => {
-  if (frame) return;
-  frame = requestAnimationFrame(() => {
-    frame = null;
-    const progress = currentProgress();
-    updateProgress(progress);
-    if (!ignoreScroll && !document.hidden) {
-      const travel = Math.max(0.1, (document.documentElement.scrollHeight - window.innerHeight) / window.innerHeight);
-      instrument?.move(progress, performance.now(), travel);
-    }
-  });
-}, { passive: true });
-window.addEventListener('resize', () => { instrument?.setPosition(currentProgress()); if (!document.hidden) instrument?.holdCurrent(); updateProgress(currentProgress()); });
-document.addEventListener('visibilitychange', () => {
-  instrument?.silence();
-  instrument?.setPosition(currentProgress());
-  if (!document.hidden) { instrument?.holdCurrent(); sound?.wake(); }
-});
-window.addEventListener('pagehide', () => instrument?.mute());
-
-$('volume').addEventListener('input', event => instrument?.setVolume(Number(event.target.value) / 100));
-$('sound-toggle').addEventListener('click', () => sound?.toggle());
-
-function wakeSound(event) {
-  if (event.isTrusted && !document.hidden && !event.target.closest?.('#sound-toggle')
-      && !event.metaKey && !event.ctrlKey && !event.altKey) sound?.wake();
-}
-document.addEventListener('pointerdown', wakeSound, { passive:true });
-document.addEventListener('pointerup', wakeSound, { passive:true });
-document.addEventListener('click', wakeSound, { passive:true });
-document.addEventListener('touchend', wakeSound, { passive:true });
-document.addEventListener('keydown', wakeSound);
+$('volume').addEventListener('input', event => player?.setVolume(Number(event.target.value) / 100));
+$('sound-toggle').dataset.scrollScoreToggle = '';
+$('sound-toggle').addEventListener('click', () => player?.toggle());
 
 await loadStory(new URLSearchParams(location.search).get('story') ?? 'space');
 try {
-  const { ScrollInstrument } = await import('./music.js');
-  instrument = new ScrollInstrument(displayNotes, idle, reportError);
-  await loadStory(new URLSearchParams(location.search).get('story') ?? 'space');
-  instrument.setVolume(Number($('volume').value) / 100);
-  sound = new SoundControl(instrument, { onChange:updateSoundControl, onError:reportError });
+  player = await createScrollScore({
+    contentElement:document.documentElement, scoreUrl:activeStory.score,
+    ...(activeStory.playback ?? {}), volume:Number($('volume').value) / 100,
+    onNotes:displayNotes, onIdle:idle, onError:reportError,
+    onStateChange:() => { if (player) updateSoundControl(); },
+    onProgress:updateProgress,
+  });
   updateSoundControl();
-  if (!document.hidden && !audioError) sound.start();
 } catch (error) { reportError(error); }
 
 // Space and PageUp/PageDown scroll naturally, so keyboard reading plays the score too.
