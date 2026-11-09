@@ -4,6 +4,8 @@
 
 [Listen on GitHub Pages](https://lsbonafe.github.io/undertone/) · [Try the standalone player](https://lsbonafe.github.io/undertone/examples/hello/) · [Browse the 20 readings](docs/readings.md) · [Open a Strudel score](scores/space.strudel)
 
+Writing a new piece? Start with the [composition guide](docs/composing.md). Agents working in this repo should also read [AGENTS.md](AGENTS.md).
+
 Undertone turns scrolling into musical phrasing. Twenty readings pair a subject with an original score: ten source-linked adaptations and ten clearly labeled fictional stories. The score supplies a musical vocabulary; the reader supplies motion, direction and pauses.
 
 ![A timeline comparing scroll-led phrasing and a continuing groove with a scroll-played lead](docs/diagrams/scroll-behavior.svg)
